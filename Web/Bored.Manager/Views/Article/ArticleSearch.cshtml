@@ -1,0 +1,78 @@
+﻿@using DKD.Core.Lucene
+@{
+    Layout = null;
+    var list = Model as List<LuceneModel>;
+    var dataCount = ViewBag.DataCount;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script type="text/javascript" src="/Content/js/jquery.min.js"></script>
+    <style type="text/css">
+        #search td{border: 1px solid #ccc;}
+    </style>
+    <script type="text/javascript">
+        $(function() {
+            $("#clear").click(function() {
+                $.post("@(Url.Action("ClearnLucene", "Article"))",{},function(data) {
+                    if (data.Result) {
+                        alert("YES");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="width: 100%;color: red;font-size: 18px;">
+        <p>一共有：@(dataCount)条</p>
+        <p>时间：@(ViewBag.Time)</p>
+        <p><input type="button" value="清空" id="clear"/></p>
+    </div>
+    <div style="width: 100%;">
+        <table id="search">
+            <tr>
+                <td width="5%">ID</td>
+                <td width="5%">类型</td>
+                <td width="10%">标题</td>
+                <td width="15%">内容</td>
+                <td width="5%">时间</td>
+                <td width="5%">图片</td>
+                <td width="5%">点击次数</td>
+                <td width="5%">标签</td>
+                <td width="10%">高亮显示标题</td>
+                <td width="10%">高亮显示内容</td>
+            </tr>
+            @foreach (var item in list ?? new List<LuceneModel>())
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Type</td>
+                    <td>@(Html.Raw(item.Title))</td>
+                    <td>@(Html.Raw(item.Content))</td>
+                    <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>
+                        @{
+                            if (item.Images != null)
+                            {
+                                foreach (var img in item.Images.Split(','))
+                                {
+                                    <img src="@img" width="100" height="100" />
+                                }
+                            }
+                        }
+                    </td>
+                    <td>@item.ClickCount</td>
+                    <td>@item.Tags</td>
+                    <td>@Html.Raw(item.HightLightTitle)</td>
+                    <td>@Html.Raw(item.HightLightContent)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

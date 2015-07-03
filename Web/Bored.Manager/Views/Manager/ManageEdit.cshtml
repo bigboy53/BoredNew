@@ -1,0 +1,72 @@
+﻿@using Bored.Manager.Helper
+@using PageHelper
+@{
+    var pageModel = PageStruct.InitEdit("manager_edit", Url.Action("Mange_Add", "Manager"), Url.Action("Mange_Edit", "Manager"), Url.Action("Manage_Model", "Manager"));
+    var id = pageModel.GetModifyId("id");
+}
+<ul class="uibutton-group">
+    <li>
+        @HtmlStringHelper.ReturnListButton("manager_Grid")
+    </li>
+    @*<li>
+        @HtmlStringHelper.ResetForm()
+    </li>*@
+</ul>
+<form id="@pageModel.FormId" class="validation">
+    @HtmlStringHelper.HiddenText("ID")
+    <div class="section ">
+        @HtmlStringHelper.Label("用户名")
+        <div>
+            @HtmlStringHelper.Text("UName", TextSize.medium, true, Custom.MaxSize(16), Custom.MinSize(6))
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("密码")
+        <div>
+            @HtmlStringHelper.Text("Password", TextSize.medium, true, Custom.MaxSize(16), Custom.MinSize(6))
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("授权码")
+        <div>
+            @HtmlStringHelper.Text("AuthCode", TextSize.medium, true, Custom.MaxSize(16), Custom.MinSize(6))
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("角色")
+        <div>
+            @HtmlStringHelper.Select("RID", CommonHelper.RoleList(), true)
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("电子邮件","格式:xx@xx.com")
+        <div>
+            @HtmlStringHelper.Text("Email", TextSize.medium,true , Custom.Email)
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("姓名","真实姓名")
+        <div>
+            @HtmlStringHelper.Text("RelName", TextSize.medium, true)
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("电话")
+        <div>
+            @HtmlStringHelper.Text("Tel", TextSize.medium,true)
+        </div>
+    </div>
+    <div class="section last">
+        <div>
+            @HtmlStringHelper.SubmitButton(pageModel.FormId)
+        </div>
+    </div>
+</form>
+@HtmlStringHelper.InitControlSpeciality(
+pageModel.FormId, 
+pageModel.OperationType, 
+pageModel.GetModelAction, 
+id, 
+pageModel.AddAction, 
+pageModel.EditAction)
+

@@ -1,0 +1,136 @@
+.ltable {
+    width : 100%;
+	padding : 0;
+	border-collapse : collapse;
+	text-align :center;
+	margin:10px auto !important;
+/*	border : 1px solid #d6d6d6;*/
+	border-top:1px solid #c9c9c9;
+	-moz-box-shadow:0px 0px 4px #efefef;
+	-webkit-box-shadow:0px 0px 4px #efefef;
+	box-shadow:0px 0px 4px #efefef;
+}
+.ltable {
+	width : 100%;
+	padding : 0;
+	border-collapse : collapse;
+	text-align :center;
+	margin:10px auto !important;
+/*	border : 1px solid #d6d6d6;*/
+	border-top:1px solid #c9c9c9;
+	-moz-box-shadow:0px 0px 4px #efefef;
+	-webkit-box-shadow:0px 0px 4px #efefef;
+	box-shadow:0px 0px 4px #efefef;
+}
+
+.ltable thead tr th, .ltable tfoot tr th {
+	color : #1c1c1c;
+}
+
+.ltable thead {
+	text-shadow: 1px 1px 1px #fff;
+	background-image: url(/Content/images/inner-shadow.png);
+	background-color: #f2f2f2;
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+
+.ltable thead tr th{
+/*	border:1px solid #d6d6d6 ;*/
+	border-top:0px solid #d6d6d6 ;
+/*	border-right : 1px solid #ffffff;*/
+	border-bottom : 1px solid #e6e6e6;
+	padding : 8px 10px 8px;
+	line-height : 25px;
+}
+	.ltable thead tr th:first-child {
+/*	border-left : 1px solid #ffffff;*/
+}
+.ltable thead tr th:last-child {
+		border-right :none;
+}
+.ltable tbody td {
+/*	border : 1px solid #e6e6e6;*/
+	border-bottom : 1px solid #e6e6e6;
+/*	border-right : 1px solid #ffffff;*/
+border-right:none;
+border-left:none;
+	padding:15px 10px!important;
+}
+
+
+.ltable tbody td:first-child {
+		/*border-left : 1px solid #ffffff;*/
+}
+.ltable tbody td:last-child {
+		border-right : none;
+}
+
+.ltable tbody tr.odd, .ltable tbody tr.even {
+ -webkit-transition: background-color .2s ease-out;
+ -moz-transition: background-color .2s ease-out;
+ -o-transition: background-color .2s ease-out;
+ transition: background-color .2s ease-out;
+	}
+.ltable tbody tr.odd  {
+	background-color : #fdfdfd;
+}
+.ltable tbody tr.even  {
+	background-color : #fafafa;
+}
+
+.ltable tbody tr:hover {
+	background-color:#eaf7ff;
+}
+.ltable tbody tr:last-child  td {
+	border-bottom : 2px solid #d9d9d9;
+}
+
+/*·ÖÒ³ÑùÊ½*/
+.pagelist {
+    clear: both;
+    display: block;
+    margin: 0 0 20px 0;
+}
+
+    .pagelist:after {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .pagelist .l-btns {
+        display: block;
+        float: left;
+        margin: 0 5px 0 0;
+        padding: 0 10px;
+        border: 1px solid #dbdbdb;
+        height: 28px;
+        overflow: hidden;
+    }
+
+        .pagelist .l-btns span {
+            font-size: 12px;
+            color: #333;
+            line-height: 28px;
+        }
+
+        .pagelist .l-btns .pagenum {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 0 5px;
+            border: 1px solid #dbdbdb;
+            border-top: 0;
+            border-bottom: 0;
+            width: 30px;
+            height: 28px;
+            line-height: 28px;
+            font-size: 12px;
+            color: #333;
+            text-align: center;
+            vertical-align: top;
+            overflow: hidden;
+        }
+

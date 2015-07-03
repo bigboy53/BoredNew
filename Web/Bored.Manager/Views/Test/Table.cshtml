@@ -1,0 +1,78 @@
+﻿@using Bored.Manager.View.Helper
+@{
+    Layout = "/Views/Shared/Main_LayoutPage.cshtml";
+}
+
+<!--顶部内容-->
+<div class="topcolumn">
+    <div class="logo"></div>
+    <ul id="shortcut">
+        <li>
+            <a href="#" title="返回首页">
+                <img src="/Content/images/icon/shortcut/home.png" alt="返回首页" />
+                <strong>首页</strong>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="图表">
+                <img src="/Content/images/icon/shortcut/graph.png" alt="图表" />
+                <strong>图表</strong>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="设置">
+                <img src="/Content/images/icon/shortcut/setting.png" alt="设置" />
+                <strong>设置</strong>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="消息">
+                <img src="/Content/images/icon/shortcut/mail.png" alt="消息" />
+                <strong>消息</strong>
+            </a>
+            <div class="notification">10</div>
+        </li>
+    </ul>
+</div>
+<div class="clear"></div>
+
+@*@HtmlStringHelper.GridTable("sss", "/User/GetData").Column("Name", "标题", 352).SelectAllBtn("ID").Column("ID", "ID", 352).EditColumn("ID", "/User/Edit").DeleteColumn("ID", "/User/Delete")*@
+<table id="STCMSJSGL_Grid" class="display"></table>
+
+
+
+<script>
+    $(function () {
+        Ui.Table(
+        {
+            Id: 'STCMSJSGL_Grid',
+            Url: '/User/GetData',
+            CheckField: 'Id',
+            SelectAllId: 'STCMSJSGL_SelectAll',
+            Colums: [
+                { Title: '名称', Width: 32, Field: 'Name' },
+                { Title: '编码', Width: 20, Field: 'Code' },
+                {
+                    Title: '状态',
+                    Width: 10,
+                    Field: 'Status',
+                    Formater: function (item, value) {
+                        if (item.Status) {
+                            return '<span style="color:green;">启用</span>';
+                        } else {
+                            return '<span style="color:red;">未启用</span>';
+                        }
+                    }
+                },
+                {
+                    Title: '操作',
+                    Width: 8,
+                    Field: 'Id',
+                    Formater: function (item, value) {
+                        return '<a href="javascript:void(0);" onclick="loadContent(\'Mgr/RoleMgr_Edit.cshtml?optype=edit&Id=' + item.Id + '\')">修改</a>';
+                    }
+                }
+            ]
+        });
+    });
+</script>

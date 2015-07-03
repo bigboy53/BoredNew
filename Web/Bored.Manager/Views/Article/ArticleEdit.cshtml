@@ -1,0 +1,103 @@
+﻿@using Bored.Manager.Helper
+@using DKD.Framework.Contract.Enum
+@using PageHelper
+@{
+    var pageModel = PageStruct.InitEdit("Article_edit", Url.Action("Article_Add", "Article"), Url.Action("Article_Edit", "Article"), Url.Action("Article_Model", "Article"));
+    var id = pageModel.GetModifyId("id");
+}
+<script type="text/javascript" charset="utf-8" src="/Content/js/UEditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Content/js/UEditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/Content/js/UEditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+    function setImg(data) {
+        if (data.ArticleImages != null && data.ArticleImages.length > 0) {
+            for (var i = 0; i < data.ArticleImages.length; i++) {
+                var html = '<li class=\"albumImage\"><input type=\"hidden\" value=\"' + data.ArticleImages[0].URL + '\" name=\"ArticleImages\"/><div class=\"picHolder\"><span class=\"image_highlight\"></span><a href=\"' + data.ArticleImages[0].URL + '\" rel=\"glr\"></a><img src=\"' + data.ArticleImages[0].URL + '\" title=\"拖拽换位置\" width=\"160\" height=\"120\"/> <div class=\"picTitle\"></div><ul class=\"dataImg\"><li>' + data.ArticleImages[0].URL + '</li><li>' + data.ArticleImages[0].URL + '</li></ul> </div> </li>';
+                $("#Imagesortable").append(html);
+                ImageInit("Imagesortable");
+            }
+        }
+        $(".upload-group").hide();
+    }
+    function setPara() {
+        var pata = Ui.FormData("@pageModel.FormId");
+        var imgsObj = $("#Imagesortable").find("input[name='Image']");
+        var imgs="";
+        if (typeof imgsObj != "undefined" &&imgsObj!=null&&imgsObj.length > 0) {
+            for (var i = 0; i < imgsObj.length; i++) {
+                imgs += imgsObj.val() + ',';
+            }
+        }
+        if (imgs !== "") {
+            imgs = imgs.substr(0, imgs.length - 1);
+        }
+        pata["Image"] = imgs;
+        return pata;
+    }
+    function InitEdit() {
+        var ue = UE.getEditor('Content', {
+            toolbars: [
+                ['emotion']
+            ],
+            elementPathEnabled: false,
+            enableContextMenu: false,
+            uploadModule:'article'
+        });
+    }
+</script>
+<ul class="uibutton-group">
+    <li>
+        @HtmlStringHelper.ReturnListButton("Article_Grid")
+    </li>
+</ul>
+<form id="@pageModel.FormId" class="validation">
+    @HtmlStringHelper.HiddenText("ID")
+    @*<div class="section ">
+        @HtmlStringHelper.Label("标题")
+        <div>
+            @HtmlStringHelper.Text("Title", TextSize.medium, true)
+        </div>
+    </div>*@
+    <div class="section ">
+        @HtmlStringHelper.Label("内容")
+        <div>
+            @HtmlStringHelper.UeditorText("Content", 300, "InitEdit()")
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("图片")
+        <div>
+            @HtmlStringHelper.FileUpload("Image",10)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("来源")
+        <div>
+            @HtmlStringHelper.Select("Source", CommonHelper.GetConfigByType(ConfigTypeEnum.ConfigType.文章来源),true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("标签")
+        <div>
+            @HtmlStringHelper.Select("Tags", CommonHelper.GetConfigByType(ConfigTypeEnum.ConfigType.文章标签), false, "", "", true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("查看次数")
+        <div>
+            @HtmlStringHelper.Text("LookCount", TextSize.medium, true, Custom.Integer)
+        </div>
+    </div>
+    <div class="section last">
+        <div>
+            @HtmlStringHelper.SubmitButton(pageModel.FormId)
+        </div>
+    </div>
+</form>
+@HtmlStringHelper.InitControlSpeciality(
+pageModel.FormId,
+pageModel.OperationType,
+pageModel.GetModelAction,
+id,
+pageModel.AddAction,
+pageModel.EditAction, "setImg","setPara()")

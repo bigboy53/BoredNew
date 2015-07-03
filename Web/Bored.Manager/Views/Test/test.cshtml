@@ -1,0 +1,195 @@
+﻿@using Bored.Manager.Helper
+@using Bored.Manager.View.Helper
+@{
+    Layout = "/Views/Shared/Main_LayoutPage.cshtml";
+}
+
+<!--中间内容-->
+<!--标题-->
+<div class="header">
+    <span>
+        <span class="ico gray window"></span>
+        标题
+    </span>
+</div>
+<div class="clear"></div>
+<!--具体内容-->
+<div class="content">
+    <!--具体内容标题--->
+    <div class="boxtitle">
+        <span class="ico gray audio_knob"></span>
+        内容描述
+        <span class="netip">
+            <a href="vform.html" class="red" title="Live demo  Validation">
+                链接
+            </a>
+            <img src="/Content/images/icon/link.png" alt="link">
+        </span>
+    </div>
+    <!--tab切换-->
+    <ul class="tabs">
+        <li class="active" style="display: list-item;">
+            <a href="#tab1" id="2">TAB1</a>
+        </li>
+        <li style="display: list-item;">
+            <a href="#tab2" id="3">
+                TAB2
+                <img src="/Content/images/icon/new.gif" width="20" height="9">
+            </a>
+        </li>
+    </ul>
+    <!--内容容器-->
+    <div class="tab_container">
+        <div id="tab1" class="tab_content">
+            <div class="load_page">
+                <div class="formEl_b">
+                    <fieldset>
+                        <legend>
+                            又是个标题。。
+                            <span class="small s_color">( 红色的提示 )</span>
+                        </legend>
+                        <form id="validation" class="validation">
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.CheckBox("sex", "SDFSADFASDFASDFASDFAS", "SDFSADFASDFASDFASDFAS", true, 123, "提示", "描述<br/>描述描述")
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.CheckBox("sex", "是", "否", true, 30)
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.Text("1", TextSize.xxsmall)
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @*@HtmlStringHelper.CheckBox("che", "你好")*@
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.Radio("show", new List<SelectItem>()
+                                                {
+                                                    new SelectItem("sdf","sdfsfsdf",true),
+                                                    new SelectItem("sdf","sdfsfsdf"),
+                                                    new SelectItem("sdf","sdfsfsdf"),
+                                                    new SelectItem("sdf","sdfsfsdf")
+                                                })
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.Select("select", TextSize.xxsmall, new List<SelectItem>()
+                                                {
+                                                    new SelectItem("sdf","sdfsfsdf",true),
+                                                    new SelectItem("sdf","sdfsfsdf"),
+                                                    new SelectItem("sdf","sdfsfsdf"),
+                                                    new SelectItem("sdf","sdfsfsdf")
+                                                })
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.Select("select", new List<SelectItem>()
+                                                {
+                                                    new SelectItem("sdf","sdfsfsdf",true),
+                                                    new SelectItem("sdf","sdfsfsdf"),
+                                                    new SelectItem("sdf","sdfsfsdf"),
+                                                    new SelectItem("sdf","sdfsfsdf")
+                                                })
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @*@HtmlStringHelper.Select("sefelect", new List<SelectItem>()
+                                                {
+                                                    new SelectItem("sdf1111","sdfsfsdf",true),
+                                                    new SelectItem("sdf22222","sdfsfsdf"),
+                                                    new SelectItem("sdf33333","sdfsfsdf"),
+                                                    new SelectItem("sdf4444","sdfsfsdf")
+                                                }, "提示", "描述", true)*@
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.SaveBtn("save", "保存")
+                                    @HtmlStringHelper.RedBtn("save", "保存")
+                                    @HtmlStringHelper.BlueBtn("save", "保存")
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.SaveBtn("save", "保存")
+                                    @HtmlStringHelper.DateTimeText("birt")
+                                    @HtmlStringHelper.DateTimeText("bir3t")
+                                    @HtmlStringHelper.DateTimeText("b2irt")
+                                    @HtmlStringHelper.DateTimeText("bi5rt")
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.StarSelect("star", "3")
+                                    @HtmlStringHelper.StarSelect("star1")
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.TextKeyUp("vali", TextSize.xxsmall, ValidationText.alluppercase, "他一时", "口福居SD卡附件里是")
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div>
+                                    @HtmlStringHelper.TextKeyUp("vali", TextSize.full, ValidationText.numericonly)
+                                    @HtmlStringHelper.TextKeyUp("vali", TextSize.full, ValidationText.textonly)
+                                    @HtmlStringHelper.TextKeyUp("vvv", TextSize.full, 4)
+                                    @HtmlStringHelper.TextKeyUp("vvv", TextSize.full, @"[^0-9\.]")
+                                    @*@HtmlStringHelper.Text("vv321312v", TextSize.full, ValidationReg.required, "minSize[1]")*@
+                                    @*@HtmlStringHelper.Text("vv435645456v", TextSize.full, ValidationReg.required, @"[^0-9\.]")*@
+                                </div>
+                            </div>
+                            <div class="section">
+                                <label>
+                                    姓名
+                                    <small>不要超过5个字符哦</small>
+                                </label>
+                                <div>
+                                    @HtmlStringHelper.TextKeyUp("vali", TextSize.medium, ValidationText.alluppercase, "他一时", "口福居SD卡附件里是")
+                                </div>
+                            </div>
+                            <div class="section last">
+                                <div>
+                                    @HtmlStringHelper.SubmitButton("validation", true)
+                                </div>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div id="tab2" class="tab_content">
+            <div class="load_page">
+                <ul class="uibutton-group">
+                    <li>
+                        @HtmlStringHelper.AddButton("/user/add")
+                    </li>
+                    <li>
+                        @HtmlStringHelper.DeleteButton("/user/delete", "sss")
+                    </li>
+                </ul>
+                <div class="tableName toolbar">
+                    <h3>Table Name</h3>
+                    @HtmlStringHelper.GridTable("sss", "/User/GetData").Column("Name", "标题", 10).SelectAllBtn("ID").Column("ID", "ID", 10).EditColumn("ID", "/User/Edit").DeleteColumn("ID", "/User/Delete")
+
+                </div>
+                <div id="STCMSJSGL_Grid"></div>
+            </div>
+            <div id="common_add1"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+</script>

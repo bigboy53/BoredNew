@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="/Content/css/zice.style.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/css/icon.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/ui-custom.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/components/datatables/dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/components/validationEngine/validationEngine.jquery.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/components/chosen/chosen.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/components/tipsy/tipsy.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/components/confirm/jquery.confirm.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/components/fancybox/jquery.fancybox.css" />
+    <link href="~/Content/components/jscrollpane/jscrollpane.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/Content/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/Content/components/ui/jquery.ui.min.js"></script>
+    <!--验证事件keyup等-->
+    <script type="text/javascript" src="/Content/components/ui/jquery.autotab.js"></script>
+    <!--时间-->
+    <script type="text/javascript" src="/Content/components/ui/timepicker.js"></script>
+    <!--返回顶部-->
+    <script type="text/javascript" src="/Content/components/scrolltop/scrolltopcontrol.js"></script>
+    <!--confirmJS-->
+    <script type="text/javascript" src="/Content/components/confirm/jquery.confirm.js"></script>
+    <!--form验证-->
+    <script type="text/javascript" src="/Content/components/validationEngine/jquery.validationEngine.js"></script>
+    <script type="text/javascript" src="/Content/components/validationEngine/languages/jquery.validationEngine-zh_CN.js"></script>
+    <!--table-->
+    @*<script type="text/javascript" src="/Content/components/datatables/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="~/Content/components/datatables/ColVis.js"></script>*@
+    <script type="text/javascript" src="~/Content/js/dataTable.js"></script>
+    <!--fancybox-->
+    <script type="text/javascript" src="/Content/components/fancybox/jquery.fancybox.js"></script>
+    <!--jscrollpane-->
+    <script type="text/javascript" src="/Content/components/jscrollpane/jscrollpane.min.js"></script>
+    <script type="text/javascript" src="/Content/components/jscrollpane/mousewheel.js"></script>
+    <script type="text/javascript" src="/Content/components/jscrollpane/mwheelIntent.js"></script>
+    <!--checkebox-->
+    <script type="text/javascript" src="/Content/components/checkboxes/iphone.check.js"></script>
+    <script type="text/javascript" src="/Content/components/checkboxes/customInput.jquery.js"></script>
+    <!--select-->
+    <script type="text/javascript" src="/Content/components/chosen/chosen.js"></script>
+    <!--星星-->
+    <script type="text/javascript" src="/Content/components/rating_star/rating_star.js"></script>
+    <script type="text/javascript" src="/Content/js/jquery.cookie.js"></script>
+    <!---提示 ToolTip-->
+    <script type="text/javascript" src="/Content/components/tipsy/jquery.tipsy.js"></script>
+    <!--上传图片-->
+    <script type="text/javascript" src="~/Content/components/uploadify/uploadify.js"></script>
+    <script type="text/javascript" src="~/Content/components/uploadify/swfobject.js"></script>
+    <script type="text/javascript" src="/Content/js/common.js"></script>
+</head>
+<body class="dashborad">
+    <div id="alertMessage" class="error"></div>
+    <div id="header" style="z-index: 47;">
+        <div id="account_info">
+            <img src="/Content/images/avatar.png" alt="Online" class="avatar">
+            <div class="setting" title="Profile Setting"><b>Welcome,</b> <b class="red">John Doe</b><img src="/Content/images/gear.png" class="gear" alt="Profile Setting"></div>
+            <div class="logout" title="Disconnect"><b>Logout</b> <img src="/Content/images/connect.png" name="connect" class="disconnect" alt="disconnect"></div>
+        </div>
+    </div>
+    <div id="shadowhead" style="display: block; position: absolute;"></div>
+    <div id="hide_panel">
+        <a class="butAcc" rel="0" id="show_menu" style="display: none;"></a>
+        <a class="butAcc" rel="1" id="hide_menu"></a>
+        <a class="butAcc" rel="0" id="show_menu_icon" style="display: none;"></a>
+        <a class="butAcc" rel="1" id="hide_menu_icon" style="display: none;"></a>
+    </div>
+    <div id="left_menu" style="left: 0px;">
+        <ul id="main_menu" class="main_menu ui-sortable">
+            <li class="limenu">
+                <a href="javascript:;">
+                    <span class="ico gray shadow home"></span>
+                    <b>菜单</b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="@Url.Action("ConfigInfoList", "ConfigInfo")">
+                    <span class="ico gray shadow pictures_folder"></span>
+                    <b>配置管理 </b>
+                </a>
+            </li>
+            <li class="limenu select">
+                <a href="@Url.Action("managelist", "manager")">
+                    <span class="ico gray shadow window"></span>
+                    <b>管理员管理</b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="@Url.Action("RolesList", "Roles")">
+                    <span class="ico gray  dimensions"></span>
+                    <b>角色管理</b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="@Url.Action("MusicList", "Music")">
+                    <span class="ico gray shadow  spreadsheet"></span>
+                    <b>音乐管理</b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="@Url.Action("GameList", "Game")">
+                    <span class="ico gray shadow pictures_folder"></span>
+                    <b>游戏管理 </b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="javascript:;">
+                    <span class="ico gray shadow  file"></span>
+                    <b>文章管理</b>
+                </a>
+                <ul>
+                    <li><a href="@Url.Action("ArticleList", "Article")">文章管理</a></li>
+                    <li><a href="@Url.Action("ArticleList", "Article")">图文管理</a></li>
+                </ul>
+            </li>
+            <li class="limenu">
+                <a href="@Url.Action("VideoList", "Video")">
+                    <span class="ico gray shadow  file"></span>
+                    <b>视频管理</b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="typography.html">
+                    <span class="ico gray  shadow paragraph_align_left"></span>
+                    <b>Typography</b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="inelement.html">
+                    <span class="ico gray shadow abacus"></span>
+                    <b>Interface elements </b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="map.html">
+                    <span class="ico gray shadow  location"></span>
+                    <b>Map location </b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="icon.html">
+                    <span class="ico gray  shadow satellite"></span>
+                    <b>Icon and Button </b>
+                </a>
+            </li>
+            <li class="limenu">
+                <a href="404.html">
+                    <span class="ico gray  shadow firewall"></span>
+                    <b>Error Pages</b>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <div id="content" style="margin-left: 240px;">
+        <div class="inner">
+            <!--顶部内容-->
+            <div class="clear" style="margin-top: 50px;"></div>
+            <div class="onecolumn">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+</html>

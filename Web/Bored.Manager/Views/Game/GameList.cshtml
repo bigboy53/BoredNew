@@ -1,0 +1,53 @@
+﻿@using Bored.Manager.Helper
+@using PageHelper
+@{
+    Layout = "~/Views/Shared/Main_LayoutPage.cshtml";
+    var pageModel = PageStruct.InitList("Game", Url.Action("GameEdit", "Game"), Url.Action("Game_List", "Game"), Url.Action("Game_Delete", "Game"));
+}
+
+<div class="header">
+    <span>
+        <span class="ico gray window"></span>
+        游戏列表
+    </span>
+</div>
+<div class="clear"></div>
+<!--具体内容-->
+<div class="content">
+    <!--具体内容标题--->
+    <div class="boxtitle">
+        <span class="ico gray audio_knob"></span>
+        游戏列表
+    </div>
+    <form>
+        <div class="load_page">
+            <ul class="uibutton-group">
+                <li>
+                    @HtmlStringHelper.AddButton(pageModel.AddUrl)
+                </li>
+                <li>
+                    @HtmlStringHelper.DeleteButton(pageModel.DeleteAction, pageModel.TableId)
+                </li>
+            </ul>
+            <div class="table_search">
+                <span>标题：</span>
+                @HtmlStringHelper.Text("title", TextSize.medium)
+                @HtmlStringHelper.SearchButton(pageModel.SearchBtnId, pageModel.TableId)
+            </div>
+            <div class="tableName toolbar">
+                <h3>游戏列表</h3>
+                @(
+ HtmlStringHelper.GridTable(pageModel.TableId, pageModel.ListAction)
+            .SelectAllBtn("ID")
+            .Column("Title", "标题", 10)
+            .Column("Url", "地址", 10)
+            .Column("ClickCount", "点击次数", 10)
+            .Column("UserName", "创建人", 10)
+            .Column("CreateTimeTxt", "创建时间", 10)
+            .EditColumn("ID", pageModel.ModifyUrl)
+            .DeleteColumn("ID", pageModel.DeleteAction)
+                )
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BB876F72-5D96-48DF-B470-AF31C17BACDD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bored.IService</RootNamespace>
+    <AssemblyName>Bored.IService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IArticleService.cs" />
+    <Compile Include="IConfigInfoService.cs" />
+    <Compile Include="IGameService.cs" />
+    <Compile Include="IMusicService.cs" />
+    <Compile Include="IRolesService.cs" />
+    <Compile Include="IManageUsersService.cs" />
+    <Compile Include="IVideoService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Lucene\DKD.Core.Lucene.csproj">
+      <Project>{F67F7DCD-7761-44A8-8573-24CAFE17F6BC}</Project>
+      <Name>DKD.Core.Lucene</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Contract\DKD.Framework.Contract.csproj">
+      <Project>{0745099a-865a-4957-b42a-9db0767c6bd7}</Project>
+      <Name>DKD.Framework.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework\DKD.Framework.csproj">
+      <Project>{45b1e818-a225-4de6-a611-60d694fa5fd4}</Project>
+      <Name>DKD.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Bored.Model\Bored.Model.csproj">
+      <Project>{7a713ee4-e816-4d47-a2e3-91732b2e6c8d}</Project>
+      <Name>Bored.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Manage.ViewModel\Manage.ViewModel.csproj">
+      <Project>{223c0116-73f4-4b7a-a0b6-481ca8d4eadf}</Project>
+      <Name>Manage.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,71 @@
+﻿@using Bored.Manager.Helper
+@using DKD.Framework.Contract.Enum
+@using PageHelper
+@{
+    var pageModel = PageStruct.InitEdit("Game_edit", Url.Action("Game_Add", "Game"), Url.Action("Game_Edit", "Game"), Url.Action("Game_Model", "Game"));
+    var id = pageModel.GetModifyId("id");
+}
+<script type="text/javascript">
+    function setImg(data) {
+        if (data.Image == null || data.Image == "")
+            return false;
+        var img = "<img class=\"imgShow\" src=\"" + data.Image + "\" width=\"100\" height=\"100\"/>";
+        $("#Image_Div .imgDiv").append(img);
+    }
+</script>
+<ul class="uibutton-group">
+    <li>
+        @HtmlStringHelper.ReturnListButton("Game_Grid")
+    </li>
+</ul>
+<form id="@pageModel.FormId" class="validation">
+    @HtmlStringHelper.HiddenText("ID")
+    <div class="section ">
+        @HtmlStringHelper.Label("标题")
+        <div>
+            @HtmlStringHelper.Text("Title", TextSize.medium,true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("图片")
+        <div>
+            @HtmlStringHelper.FileUpload("Image")
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("地址")
+        <div>
+            @HtmlStringHelper.Text("Url", TextSize.medium, true,Custom.Url)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("来源")
+        <div>
+            @HtmlStringHelper.Select("Source", CommonHelper.GetConfigByType(ConfigTypeEnum.ConfigType.游戏来源))
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("标签")
+        <div>
+            @HtmlStringHelper.Select("Tags", CommonHelper.GetConfigByType(ConfigTypeEnum.ConfigType.游戏标签),false,"","",true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("点击次数")
+        <div>
+            @HtmlStringHelper.Text("ClickCount", TextSize.medium, true, Custom.Integer)
+        </div>
+    </div>
+    <div class="section last">
+        <div>
+            @HtmlStringHelper.SubmitButton(pageModel.FormId)
+        </div>
+    </div>
+</form>
+@HtmlStringHelper.InitControlSpeciality(
+pageModel.FormId,
+pageModel.OperationType,
+pageModel.GetModelAction,
+id,
+pageModel.AddAction,
+pageModel.EditAction,"setImg")

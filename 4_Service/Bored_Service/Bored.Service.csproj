@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B43EAC94-0C08-4A91-A508-FC02C71DC0F6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bored.Service</RootNamespace>
+    <AssemblyName>Bored.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\Lib\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\Lib\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArticleService.cs" />
+    <Compile Include="BllHelper.cs" />
+    <Compile Include="ConfigInfoService.cs" />
+    <Compile Include="GameService.cs" />
+    <Compile Include="MusicService.cs" />
+    <Compile Include="RolesService.cs" />
+    <Compile Include="ManageUsersService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VideoService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\3_Repository\Bored_Repository\Bored.Repository.csproj">
+      <Project>{20ec89fc-4252-42a0-935b-8a893c9e72f4}</Project>
+      <Name>Bored.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\3_Repository\Bored_IRepository\Bored.IRepository.csproj">
+      <Project>{eef4e858-c050-4d35-86f1-0b55d5f6ea2c}</Project>
+      <Name>Bored.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Cache\DKD.Core.Cache.csproj">
+      <Project>{fb36a890-786b-490e-aeab-060c12f1160b}</Project>
+      <Name>DKD.Core.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Logger\DKD.Core.Logger.csproj">
+      <Project>{cf0ebb91-24b4-479c-af96-51043ef857cd}</Project>
+      <Name>DKD.Core.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Lucene\DKD.Core.Lucene.csproj">
+      <Project>{f67f7dcd-7761-44a8-8573-24cafe17f6bc}</Project>
+      <Name>DKD.Core.Lucene</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Contract\DKD.Framework.Contract.csproj">
+      <Project>{0745099a-865a-4957-b42a-9db0767c6bd7}</Project>
+      <Name>DKD.Framework.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework\DKD.Framework.csproj">
+      <Project>{45b1e818-a225-4de6-a611-60d694fa5fd4}</Project>
+      <Name>DKD.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.DAL\DKD.Framework.Data.csproj">
+      <Project>{7d7296e2-8e39-451a-92c0-448abb73166c}</Project>
+      <Name>DKD.Framework.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Bored.Model\Bored.Model.csproj">
+      <Project>{7a713ee4-e816-4d47-a2e3-91732b2e6c8d}</Project>
+      <Name>Bored.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Manage.ViewModel\Manage.ViewModel.csproj">
+      <Project>{223c0116-73f4-4b7a-a0b6-481ca8d4eadf}</Project>
+      <Name>Manage.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bored_IService\Bored.IService.csproj">
+      <Project>{bb876f72-5d96-48df-b470-af31c17bacdd}</Project>
+      <Name>Bored.IService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

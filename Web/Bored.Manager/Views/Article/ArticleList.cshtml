@@ -1,0 +1,55 @@
+﻿@using Bored.Manager.Helper
+@using DKD.Framework.Contract.Enum
+@using PageHelper
+@{
+    Layout = "~/Views/Shared/Main_LayoutPage.cshtml";
+    var pageModel = PageStruct.InitList("Article", Url.Action("ArticleEdit", "Article"), Url.Action("Article_List", "Article"), Url.Action("Article_Delete", "Article"));
+}
+
+<div class="header">
+    <span>
+        <span class="ico gray window"></span>
+        文章列表
+    </span>
+</div>
+<div class="clear"></div>
+<!--具体内容-->
+<div class="content">
+    <!--具体内容标题--->
+    <div class="boxtitle">
+        <span class="ico gray audio_knob"></span>
+        文章列表
+    </div>
+    <form>
+        <div class="load_page">
+            <ul class="uibutton-group">
+                <li>
+                    @HtmlStringHelper.AddButton(pageModel.AddUrl)
+                </li>
+                <li>
+                    @HtmlStringHelper.DeleteButton(pageModel.DeleteAction, pageModel.TableId)
+                </li>
+            </ul>
+            <div class="table_search">
+                <span>用户名：</span>
+                @HtmlStringHelper.Text("userName", TextSize.small)
+                <span>来源：</span>
+                @HtmlStringHelper.Select("soruce",CommonHelper.GetConfigByType(ConfigTypeEnum.ConfigType.文章来源))
+                @HtmlStringHelper.SearchButton(pageModel.SearchBtnId, pageModel.TableId)
+            </div>
+            <div class="tableName toolbar">
+                <h3>游戏列表</h3>
+                @(
+                    HtmlStringHelper.GridTable(pageModel.TableId, pageModel.ListAction)
+                    .SelectAllBtn("ID")
+                    .Column("SourceTxt", "来源", 10)
+                    .Column("LookCount", "点击次数", 10)
+                    .Column("UserName", "创建人", 10)
+                    .Column("CreateTimeTxt", "创建时间", 10)
+                    .EditColumn("ID", pageModel.ModifyUrl)
+                    .DeleteColumn("ID", pageModel.DeleteAction)
+                )
+            </div>
+        </div>
+    </form>
+</div>

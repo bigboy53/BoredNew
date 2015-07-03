@@ -1,0 +1,44 @@
+﻿@using Bored.Manager.Helper
+@using PageHelper
+@{
+    var pageModel = PageStruct.InitEdit("ConfigInfo_edit", Url.Action("ConfigInfo_Add", "ConfigInfo"), Url.Action("ConfigInfo_Edit", "ConfigInfo"), Url.Action("ConfigInfo_Model", "ConfigInfo"));
+    var id = pageModel.GetModifyId("id");
+}
+<script type="text/javascript">
+    function setImg(data) {
+        var img = "<img class=\"imgShow\" src=\"" + data.Image + "\" width=\"100\" height=\"100\"/>";
+        $("#Image_Div .imgDiv").append(img);
+    }
+</script>
+<ul class="uibutton-group">
+    <li>
+        @HtmlStringHelper.ReturnListButton("ConfigInfo_Grid")
+    </li>
+</ul>
+<form id="@pageModel.FormId" class="validation">
+    @HtmlStringHelper.HiddenText("ID")
+    <div class="section ">
+        @HtmlStringHelper.Label("名称")
+        <div>
+            @HtmlStringHelper.Text("Name", TextSize.medium,true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("类型")
+        <div>
+            @HtmlStringHelper.Select("Type", CommonHelper.GetConfigList(), true)
+        </div>
+    </div>
+    <div class="section last">
+        <div>
+            @HtmlStringHelper.SubmitButton(pageModel.FormId)
+        </div>
+    </div>
+</form>
+@HtmlStringHelper.InitControlSpeciality(
+pageModel.FormId,
+pageModel.OperationType,
+pageModel.GetModelAction,
+id,
+pageModel.AddAction,
+pageModel.EditAction,"setImg")

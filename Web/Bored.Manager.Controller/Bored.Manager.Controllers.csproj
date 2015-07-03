@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B385A475-1CBA-465A-9026-9F0A6CDD2C13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bored.Manager.Controllers</RootNamespace>
+    <AssemblyName>Bored.Manager.Controllers</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lucene.Net, Version=2.9.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu">
+      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.HighLight, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.HighLight.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.Lucene.Analyzer, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.Lucene.Analyzer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArticleController.cs" />
+    <Compile Include="ConfigInfoController.cs" />
+    <Compile Include="GameController.cs" />
+    <Compile Include="HomeController.cs" />
+    <Compile Include="MusicController.cs" />
+    <Compile Include="RolesController.cs" />
+    <Compile Include="ManagerController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestController.cs" />
+    <Compile Include="VideoController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Lucene\DKD.Core.Lucene.csproj">
+      <Project>{f67f7dcd-7761-44a8-8573-24cafe17f6bc}</Project>
+      <Name>DKD.Core.Lucene</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Contract\DKD.Framework.Contract.csproj">
+      <Project>{0745099A-865A-4957-B42A-9DB0767C6BD7}</Project>
+      <Name>DKD.Framework.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework\DKD.Framework.csproj">
+      <Project>{45b1e818-a225-4de6-a611-60d694fa5fd4}</Project>
+      <Name>DKD.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\4_Service\Bored_IService\Bored.IService.csproj">
+      <Project>{bb876f72-5d96-48df-b470-af31c17bacdd}</Project>
+      <Name>Bored.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Bored.Model\Bored.Model.csproj">
+      <Project>{7a713ee4-e816-4d47-a2e3-91732b2e6c8d}</Project>
+      <Name>Bored.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Manage.ViewModel\Manage.ViewModel.csproj">
+      <Project>{223c0116-73f4-4b7a-a0b6-481ca8d4eadf}</Project>
+      <Name>Manage.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bored.Manager.Filter\Bored.Manager.Filter.csproj">
+      <Project>{d37453f1-477e-4db2-aa56-e38bbc57a6c3}</Project>
+      <Name>Bored.Manager.Filter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

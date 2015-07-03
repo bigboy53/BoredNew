@@ -1,0 +1,317 @@
+﻿@{
+    Layout = "/Views/Shared/Main_LayoutPage.cshtml";
+}
+
+<div class="inner">
+    <div class="topcolumn">
+        <div class="logo"></div>
+        <ul id="shortcut">
+            <li> <a href="#" title="Back To home"> <img src="/Content/images/icon/shortcut/home.png" alt="home" /><strong>Home</strong> </a> </li>
+            <li> <a href="#" title="Website Graph"> <img src="/Content/images/icon/shortcut/graph.png" alt="graph" /><strong>Graph</strong> </a> </li>
+            <li> <a href="#" title="Setting"> <img src="/Content/images/icon/shortcut/setting.png" alt="setting" /><strong>Setting</strong></a> </li>
+            <li> <a href="#" title="Messages"> <img src="/Content/images/icon/shortcut/mail.png" alt="messages" /><strong>Message</strong></a><div class="notification">10</div></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+    <div class="onecolumn">
+        <div class="header"><span><span class="ico  gray connect"></span>Validation and  Live demo </span> </div><!-- End header -->
+        <div class="clear"></div>
+        <div class="content">
+
+            <div id="uploadTab">
+                <ul class="tabs">
+                    <li><a href="#tab1" id="2">  validation  </a></li>
+                    <li><a href="#tab2" id="3">  live demo  <img src="/Content/images/icon/new.gif" width="20" height="9" /></a></li>
+                </ul>
+                <div class="tab_container">
+
+                    <div id="tab1" class="tab_content">
+                        <div class="load_page">
+                            <div class="formEl_b">
+                                <form action="#">
+                                    <fieldset>
+                                        <legend>Ex.  elements <span class="small s_color">( Custom )</span></legend>
+                                        <div class="section numericonly">
+                                            <label> onlyNums <small>Text custom</small></label>
+                                            <div>
+                                                <input name="text" type="text" class="large" />
+                                            </div>
+                                        </div>
+                                        <div class="section textonly">
+                                            <label> onlyText <small>Text custom</small></label>
+                                            <div>
+                                                <input name="text[]" type="text" class="large" />
+                                            </div>
+                                        </div>
+                                        <div class="section alphaonly">
+                                            <label> onlyAlpha <small>Text custom</small></label>
+                                            <div>
+                                                <input name="text[]" type="text" class="medium" maxlength="4" />
+
+                                            </div>
+                                        </div>
+                                        <div class="section regexonly">
+                                            <label> onlyRegex <small>Text custom</small></label>
+                                            <div>
+                                                <input name="text[]" type="text" class="large" />
+                                            </div>
+                                        </div>
+                                        <div class="section alluppercase">
+                                            <label> allUpper <small>Text custom</small></label>
+                                            <div>
+                                                <input name="text[]" type="text" class="large" />
+                                            </div>
+                                        </div>
+                                        <div class="section">
+                                            <label> custom Ex. </label>
+                                            <div> <input type="text" name="menu" id="menu" class=" large" /></div>
+                                            <div>
+                                                <input type="text" name="menu" id="menu" class=" small" />
+                                                <span class="f_help">Text custom help</span>
+                                            </div>
+                                        </div>
+                                        <div class="section last">
+                                            <label>custom   with label <small>Text custom</small></label>
+                                            <div>
+                                                <input type="text" class="small" name="priceSale" id="priceSale" /> <label class='red'> Sale price </label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" id="on_off" name="showPrice" class="on_off_checkbox" value="1" checked="checked" />
+                                                <span class="f_help">ON / OFF  </span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
+                            <div class="formEl_b">
+                                <form id="validation">
+                                    <fieldset>
+                                        <legend>Ex.  elements <span class="small s_color">( Validation )</span></legend>
+                                        <div class="section ">
+                                            <label> input size<small>Text custom</small></label>
+                                            <div>
+                                                <input type="text" class="validate[required] large" name="f_required" id="f_required" />
+                                            </div>
+                                            <div>
+                                                <input type="text" name="menu" id="menu" class="validate[required,custom[onlyLetterSp]] small" />
+                                                <span class="f_help">OnlyLetterSp</span>
+                                            </div>
+                                        </div>
+                                        <div class="section ">
+                                            <label> Email validate<small>Text custom</small></label>
+                                            <div>
+                                                <input type="text" class="validate[required,custom[email]]  large" name="e_required" id="e_required" />
+                                            </div>
+                                        </div>
+                                        <div class="section">
+                                            <label> Login  Account  <small>Text custom</small></label>
+                                            <div>
+                                                <input type="text" name="username" id="username" class="validate[required,minSize[3],maxSize[20],] medium" /><label>Username</label>
+                                                <span class="f_help"> Username login or register. <br />Should be between 3 and not more than 20 characters.</span>
+                                            </div>
+                                            <div>
+                                                <input type="password" class="validate[required,minSize[3]] medium" name="password" id="password" /><label>Password</label>
+                                            </div>
+                                            <div>
+                                                <input type="password" class="validate[required,equals[password]] medium" name="passwordCon" id="passwordCon" /><label>Confirm Password</label>
+                                                <span class="f_help"> Your password should be at least 6 characters.</span>
+                                            </div>
+                                        </div>
+                                        <div class="section ">
+                                            <label> URL validate<small>Text custom</small></label>
+                                            <div>
+                                                <input type="text" class="validate[required,custom[url]]  large" name="url_required" id="url_required" value="http://" />
+                                            </div>
+                                        </div>
+                                        <div class="section last">
+                                            <div>
+                                                <a class="uibutton submit_form">submitForm</a><a class="uibutton special" onclick="ResetForm()" title="Reset  Form">Clear Form</a>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--tab1-->
+
+
+                    <div id="tab2" class="tab_content">
+                        <div class="load_page">
+                            <ul class="uibutton-group">
+                                <li><span class="tip"><a class="uibutton icon add on_load" name="#tab1" title="Click Add Product">Add Product</a></span></li>
+                                <li><a class="uibutton special DeleteAll">Delete</a></li>
+                            </ul>
+                            <form class="tableName toolbar">
+
+                                <h3>Table Name</h3>
+                                <table class="display data_table2 " id="data_table">
+                                    <thead>
+                                        <tr>
+                                            <th width="35"><input type="checkbox" id="checkAll1" class="checkAll" /></th>
+                                            <th width="352" align="left">Name</th>
+                                            <th width="174">Type</th>
+                                            <th width="246">Show ID</th>
+                                            <th width="199">Management</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td width="35"><input type="checkbox" name="checkbox[]" class="chkbox" id="check1" /></td>
+                                            <td align="left">A ring</td>
+                                            <td>ring A</td>
+                                            <td>RD115599</td>
+                                            <td>
+                                                <span class="tip">
+                                                    <a title="Edit">
+                                                        <img src="/Content/images/icon/icon_edit.png" />
+                                                    </a>
+                                                </span>
+                                                <span class="tip">
+                                                    <a id="1" class="Delete" name="Band ring" title="Delete">
+                                                        <img src="/Content/images/icon/icon_delete.png" />
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="35"><input type="checkbox" name="checkbox[]" class="chkbox" id="check2" /></td>
+                                            <td align="left">B ring</td>
+                                            <td>ring B</td>
+                                            <td>RD115560</td>
+                                            <td>
+                                                <span class="tip">
+                                                    <a title="Edit">
+                                                        <img src="/Content/images/icon/icon_edit.png" />
+                                                    </a>
+                                                </span>
+                                                <span class="tip">
+                                                    <a id="1" class="Delete" name="Band ring" title="Delete">
+                                                        <img src="/Content/images/icon/icon_delete.png" />
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="35"><input type="checkbox" name="checkbox[]" class="chkbox" id="check3" /></td>
+                                            <td align="left">C ring</td>
+                                            <td>ring C</td>
+                                            <td>RD115561</td>
+                                            <td>
+                                                <span class="tip">
+                                                    <a title="Edit">
+                                                        <img src="/Content/images/icon/icon_edit.png" />
+                                                    </a>
+                                                </span>
+                                                <span class="tip">
+                                                    <a id="1" class="Delete" name="Band ring" title="Delete">
+                                                        <img src="/Content/images/icon/icon_delete.png" />
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="35"><input type="checkbox" name="checkbox[]" class="chkbox" id="check4" /></td>
+                                            <td align="left">D ring</td>
+                                            <td>ring D</td>
+                                            <td>RD115562</td>
+                                            <td>
+                                                <span class="tip">
+                                                    <a title="Edit">
+                                                        <img src="/Content/images/icon/icon_edit.png" />
+                                                    </a>
+                                                </span>
+                                                <span class="tip">
+                                                    <a id="1" class="Delete" name="Band ring" title="Delete">
+                                                        <img src="/Content/images/icon/icon_delete.png" />
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="35"><input type="checkbox" name="checkbox[]" class="chkbox" id="check5" /></td>
+                                            <td align="left">E ring</td>
+                                            <td>ring E</td>
+                                            <td>RD115562</td>
+                                            <td>
+                                                <span class="tip">
+                                                    <a title="Edit">
+                                                        <img src="/Content/images/icon/icon_edit.png" />
+                                                    </a>
+                                                </span>
+                                                <span class="tip">
+                                                    <a id="1" class="Delete" name="Band ring" title="Delete">
+                                                        <img src="/Content/images/icon/icon_delete.png" />
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="show_add" style=" display:none">
+                            <ul class="uibutton-group">
+                                <li><span class="tip"><a class="uibutton icon prev on_prev " id="on_prev_pro" name="#tab2" onclick="jQuery('#validation_demo').validationEngine('hideAll')" title="Go Back">demo pages</a></span></li>
+                                <li><span class="tip"><a class="uibutton special" onclick="ResetForm()" title="Reset  Form">Clear Form</a></span></li>
+                            </ul>
+                            <form id="validation_demo" action="#">
+
+                                <div class="section ">
+                                    <label> input size<small>Text custom</small></label>
+                                    <div>
+                                        <input type="text" class="validate[required] large" name="f_required" id="f_required" />
+                                    </div>
+                                    <div>
+                                        <input type="text" name="menu" id="menu" class="validate[required,custom[onlyLetterSp]] small" />
+                                        <span class="f_help">OnlyLetterSp</span>
+                                    </div>
+                                </div>
+                                <div class="section ">
+                                    <label> Email validate<small>Text custom</small></label>
+                                    <div>
+                                        <input type="text" class="validate[required,custom[email]]  large" name="e_required" id="e_required" />
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <label> Login  Account  <small>Text custom</small></label>
+                                    <div>
+                                        <input type="text" name="username" id="username" class="validate[required,minSize[3],maxSize[20],] medium" /><label>Username</label>
+                                        <span class="f_help"> Username login or register. <br />Should be between 3 and not more than 20 characters.</span>
+                                    </div>
+                                    <div>
+                                        <input type="password" class="validate[required,minSize[3]] medium" name="password" id="password" /><label>Password</label>
+                                    </div>
+                                    <div>
+                                        <input type="password" class="validate[required,equals[password]] medium" name="passwordCon" id="passwordCon" /><label>Confirm Password</label>
+                                        <span class="f_help"> Your password should be at least 6 characters.</span>
+                                    </div>
+                                </div>
+                                <div class="section ">
+                                    <label> URL validate<small>Text custom</small></label>
+                                    <div>
+                                        <input type="text" class="validate[required,custom[url]]  large" name="url_required" id="url_required" value="http://" />
+                                    </div>
+                                </div>
+                                <div class="section last">
+                                    <div>
+                                        <a class="uibutton submit_form">submitForm</a>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div><!--tab2-->
+
+                </div>
+            </div><!--/END TAB/-->
+            <div class="clear" />
+        </div>
+    </div>
+</div>

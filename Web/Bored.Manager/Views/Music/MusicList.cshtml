@@ -1,0 +1,59 @@
+﻿@using Bored.Manager.Helper
+@using PageHelper
+@{
+    Layout = "~/Views/Shared/Main_LayoutPage.cshtml";
+    var pageModel = PageStruct.InitList("Music", Url.Action("MusicEdit", "Music"), Url.Action("Music_List", "Music"), Url.Action("Music_Delete", "Music"));
+}
+
+<div class="header">
+    <span>
+        <span class="ico gray window"></span>
+        音乐列表
+    </span>
+</div>
+<div class="clear"></div>
+<!--具体内容-->
+<div class="content">
+    <!--具体内容标题--->
+    <div class="boxtitle">
+        <span class="ico gray audio_knob"></span>
+        音乐列表
+    </div>
+    <form>
+        <div class="load_page">
+            <ul class="uibutton-group">
+                <li>
+                    @HtmlStringHelper.AddButton(pageModel.AddUrl)
+                </li>
+                <li>
+                    @HtmlStringHelper.DeleteButton(pageModel.DeleteAction, pageModel.TableId)
+                </li>
+            </ul>
+            <div class="table_search">
+                <span>歌名：</span>
+                @HtmlStringHelper.Text("song", TextSize.small)
+                <span>歌手：</span>
+                @HtmlStringHelper.Text("songer", TextSize.small)
+                <span>是否为MV：</span>
+                @HtmlStringHelper.Select("ismv", new List<SelectItem> { new SelectItem("全部", ""), new SelectItem("是", "true"), new SelectItem("否", "false") })
+                @HtmlStringHelper.SearchButton(pageModel.SearchBtnId, pageModel.TableId)
+            </div>
+            <div class="tableName toolbar">
+                <h3>音乐列表</h3>
+                @(
+ HtmlStringHelper.GridTable(pageModel.TableId, pageModel.ListAction)
+            .SelectAllBtn("ID")
+            .Column("Song", "歌名", 10)
+            .Column("Songer", "歌手", 10)
+            .Column("Url", "地址", 10)
+            .Column("IsMvTxt", "是否为MV", 10)
+            .Column("ClickCount", "点击次数", 10)
+            .Column("UserName", "创建人", 10)
+            .Column("CreateTimeTxt", "创建时间", 10)
+            .EditColumn("ID", pageModel.ModifyUrl)
+            .DeleteColumn("ID", pageModel.DeleteAction)
+                )
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,51 @@
+﻿@using Bored.Manager.Helper
+@using Bored.Manager.View.Helper
+@using PageHelper
+@{
+    Layout = "/Views/Shared/Main_LayoutPage.cshtml";
+    var pageModel = PageStruct.InitList("test", "/test/add", "/test/GetData", "/test/delete");
+}
+
+
+<div class="header">
+    <span>
+        <span class="ico gray window"></span>
+        标题
+    </span>
+</div>
+<div class="clear"></div>
+<!--具体内容-->
+<div class="content">
+    <!--具体内容标题--->
+    <div class="boxtitle">
+        <span class="ico gray audio_knob"></span>
+        内容描述
+        <span class="netip">
+            <a href="vform.html" class="red" title="Live demo  Validation">
+                链接
+            </a>
+            <img src="/Content/images/icon/link.png" alt="link">
+        </span>
+    </div>
+    <div class="load_page">
+        <ul class="uibutton-group">
+            <li>
+                @HtmlStringHelper.AddButton(pageModel.AddUrl)
+            </li>
+            <li>
+                @HtmlStringHelper.DeleteButton(pageModel.DeleteAction, pageModel.TableId)
+            </li>
+        </ul>
+        <div class="tableName toolbar">
+            <h3>Table Name</h3>
+            @(
+ HtmlStringHelper.GridTable(pageModel.TableId, pageModel.ListAction)
+                .Column("Name", "标题", 10)
+                .SelectAllBtn("ID")
+                .Column("ID", "ID", 10)
+                .EditColumn("ID", pageModel.ModifyUrl)
+                .DeleteColumn("ID", pageModel.DeleteAction)
+            )
+        </div>
+    </div>
+</div>

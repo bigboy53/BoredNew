@@ -1,0 +1,87 @@
+﻿@using Bored.Manager.Helper
+@using DKD.Framework.Contract.Enum
+@using PageHelper
+@{
+    var pageModel = PageStruct.InitEdit("Music_edit", Url.Action("Music_Add", "Music"), Url.Action("Music_Edit", "Music"), Url.Action("Music_Model", "Music"));
+    var id = pageModel.GetModifyId("id");
+}
+<script type="text/javascript">
+    function setImg(data) {
+        var img = "<img class=\"imgShow\" src=\"" + data.Image + "\" width=\"100\" height=\"100\"/>";
+        $("#Image_Div .imgDiv").append(img);
+    }
+</script>
+<ul class="uibutton-group">
+    <li>
+        @HtmlStringHelper.ReturnListButton("Music_Grid")
+    </li>
+</ul>
+<form id="@pageModel.FormId" class="validation">
+    @HtmlStringHelper.HiddenText("ID")
+    <div class="section ">
+        @HtmlStringHelper.Label("歌名")
+        <div>
+            @HtmlStringHelper.Text("Song", TextSize.medium,true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("歌手")
+        <div>
+            @HtmlStringHelper.Text("Songer", TextSize.medium,true)
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("是否为MV")
+        <div>
+            @HtmlStringHelper.CheckBox("IsMv", "是", "否")
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("图片")
+        <div>
+            @HtmlStringHelper.FileUpload("Image")
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("地址")
+        <div>
+            @HtmlStringHelper.Text("Url", TextSize.medium, true,Custom.Url)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("来源")
+        <div>
+            @HtmlStringHelper.Select("Source", CommonHelper.GetConfigByType(ConfigTypeEnum.ConfigType.音乐来源))
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("标签")
+        <div>
+            @HtmlStringHelper.Select("Tags", CommonHelper.GetConfigByType(ConfigTypeEnum.ConfigType.音乐标签), false, "", "", true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("歌词")
+        <div>
+            @HtmlStringHelper.TextArea("Lyrics")
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("点击次数")
+        <div>
+            @HtmlStringHelper.Text("ClickCount", TextSize.medium, true, Custom.Integer)
+        </div>
+    </div>
+    <div class="section last">
+        <div>
+            @HtmlStringHelper.SubmitButton(pageModel.FormId)
+        </div>
+    </div>
+</form>
+@HtmlStringHelper.InitControlSpeciality(
+pageModel.FormId,
+pageModel.OperationType,
+pageModel.GetModelAction,
+id,
+pageModel.AddAction,
+pageModel.EditAction,"setImg")

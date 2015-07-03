@@ -1,0 +1,150 @@
+﻿@using Bored.Manager.Helper
+@using DKD.Framework.MD5
+@using PageHelper
+@{
+    var pageModel = PageStruct.InitEdit("roles_edit", Url.Action("roles_Add", "Roles"), Url.Action("roles_Edit", "Roles"), Url.Action("roles_Model", "Roles"));
+    var id = pageModel.GetModifyId("id");
+}
+<script type="text/javascript">
+    function SetPer() {
+        $.ajax({
+            url: "@Url.Action("Roles_GetPremission", "Roles")",
+            type: "post",
+            data: { rid: @(id) },
+            dataType: "json",
+            success: function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    var obj = $("#" + data[i].RPUrl);
+                    if (typeof(obj) != "undefined") {
+                        obj.attr("checked", true);
+                        obj.parent().find("label").addClass("checked");
+                        var parent =obj.parent().parent();
+                        var select=obj.find("input:checkbox").not("input:checked").not(".selectAll");
+                        if(select.length<=0){
+                            parent.find(".selectAll").attr("checked", true).next("label").addClass("checked");
+                        }
+                    }
+                }
+            }
+        });
+    }
+</script>
+<ul class="uibutton-group">
+    <li>
+        @HtmlStringHelper.ReturnListButton("roles_Grid")
+    </li>
+</ul>
+<form id="@pageModel.FormId" class="validation">
+    @HtmlStringHelper.HiddenText("ID")
+    <div class="section ">
+        @HtmlStringHelper.Label("角色名")
+        <div>
+            @HtmlStringHelper.Text("RoleName", TextSize.medium, true)
+        </div>
+    </div>
+    <div class="section ">
+        @HtmlStringHelper.Label("权限")
+        <div>
+            @{
+                var index = 0;
+                foreach (var item in CommonHelper.GetPermissionList())
+                {
+                    index++;
+                    <div style="width: 100%; clear: both;">
+                        <span style="width: 90px; display: inline-block;">@item.Key</span>
+                        @HtmlStringHelper.CheckBox(item.Key + index, item.Key + index, "全选", "", false, "", "", "selectAll")
+                        @foreach (var per in item.Value)
+                        {
+                            @HtmlStringHelper.CheckBox(per.ActionUrl.Encrypt(), "ActionName", per.Name, per.ActionUrl.Encrypt() + "|" + per.Name)
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="section">
+        @HtmlStringHelper.Label("状态")
+        <div>
+            @HtmlStringHelper.CheckBox("RoleLock", "开启", "关闭")
+        </div>
+    </div>
+    <div class="section last">
+        <div>
+            @HtmlStringHelper.SubmitButton(pageModel.FormId)
+        </div>
+    </div>
+</form>
+@HtmlStringHelper.InitControlSpeciality(
+pageModel.FormId,
+pageModel.OperationType,
+pageModel.GetModelAction,
+id,
+pageModel.AddAction,
+pageModel.EditAction, "SetPer")
+
+<script type="text/javascript">
+    function Submit() {
+        var roleName = $("#RoleName").val();
+        var roleLock = $("#RoleLock").val();
+        var actionName="";
+        $(".ck:checkbox:not(.selectAll):checked").each(function (i, v) {
+            actionName += $(v).val()+",";
+        });
+        if (roleName == "") {
+            Common.showWarning('请填写角色名称！');
+            return false;
+        }
+        if (actionName == "") {
+            Common.showWarning('请选择角色权限！');
+            return false;
+        }
+        actionName = actionName.substr(0, actionName.length - 1);
+        Common.loading("正在加载...", 1);
+        $.ajax({
+            url: "@(pageModel.OperationType == "add"?pageModel.AddAction:pageModel.EditAction)",
+            type: "post",
+            data: { roleLock: roleLock, roleName: roleName, actionName: actionName,rid:@(id) },
+            dataType: "json",
+            success: function (data) {
+                Common.unloading();
+                if (data.Result) {
+                    Common.showSuccess('操作成功！');
+                    $("form#roles_edit_Form").parent().find('#on_prev_pro').click();
+                } else {
+                    Common.showWarning(data.Error);
+                }
+            },
+            error: function () {
+                Common.unloading();
+                Common.showError('网络错误，请刷新重试！');
+            }
+        });
+    }
+
+
+    $(function () {
+        $(".selectAll").click(function () {
+            var obj = $(this).parent().parent();
+            var isChecked = $(this).attr("checked") == "checked";
+            if (isChecked) {
+                obj.find("label").addClass("checked");
+            } else {
+                obj.find("label").removeClass("checked");
+            }
+            obj.find("input:checkbox:not(.selectAll)").attr("checked", $(this).attr("checked") == "checked");
+        });
+
+        $(".ck:not(.selectAll)").click(function () {
+            var obj = $(this).parent().parent();
+            var select = obj.find("input:checkbox").not("input:checked").not(".selectAll");
+            if (select.length > 0) {
+                obj.find(".selectAll").attr("checked", false).next("label").removeClass("checked");
+            } else {
+                obj.find(".selectAll").attr("checked", true).next("label").addClass("checked");
+            }
+        });
+    });
+</script>
+
+
+
