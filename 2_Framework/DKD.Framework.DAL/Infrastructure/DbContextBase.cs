@@ -19,7 +19,7 @@ namespace DKD.Framework.Data.Infrastructure
             : base(connectionStr)
         { }
 
-        private IAuditable _auditable;
+        private readonly IAuditable _auditable;
 
         public DbContextBase(string connectionStr, IAuditable auditable)
             : base(connectionStr)
