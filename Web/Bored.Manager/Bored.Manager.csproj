@@ -137,8 +137,8 @@
     <Compile Include="Content\js\UEditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="Content\js\UEditor\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\js\UEditor\net\App_Code\UploadHandler.cs" />
-    <Compile Include="Handler\ScHandler.ashx.cs">
-      <DependentUpon>ScHandler.ashx</DependentUpon>
+    <Compile Include="Handler\UpLoadHandler.ashx.cs">
+      <DependentUpon>UpLoadHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Helper\CommonHelper.cs" />
     <Compile Include="Helper\GridTable.cs" />
@@ -1654,7 +1654,7 @@
   <ItemGroup>
     <Content Include="Views\Music\MusicEdit.cshtml" />
     <Content Include="Views\Music\MusicList.cshtml" />
-    <Content Include="Handler\ScHandler.ashx" />
+    <Content Include="Handler\UpLoadHandler.ashx" />
     <Content Include="Views\Game\GameEdit.cshtml" />
     <Content Include="Views\Game\GameList.cshtml" />
     <Content Include="Views\ConfigInfo\ConfigInfoEdit.cshtml" />

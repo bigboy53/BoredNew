@@ -548,7 +548,7 @@ namespace Bored.Manager.Helper
             html.Append(" $(function () {");
             html.AppendFormat("$('#{0}_Div #uploadify').uploadify(", id);
             html.Append("{'uploader': '/Content/components/uploadify/uploadify.swf',");
-            html.Append("'script': '/Handler/ScHandler.ashx',");
+            html.Append("'script': '/Handler/UpLoadHandler.ashx',");
             html.Append("'cancelImg': '/Content/components/uploadify/cancel.png',");
             html.Append("'multi': false,");
             html.Append("'auto': true,");

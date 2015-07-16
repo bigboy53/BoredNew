@@ -89,10 +89,12 @@ namespace DKD.Core.Upload
                 if (!Directory.Exists(fileFolder))
                     Directory.CreateDirectory(fileFolder);
 
-                var fs = new FileStream(Result.FilePath, FileMode.Create, FileAccess.Write);
-                fs.Write(file, 0, file.Length);
-                fs.Flush();
-                fs.Close();
+                using (var fs = new FileStream(Result.FilePath, FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(file, 0, file.Length);
+                    fs.Flush();
+                    fs.Close();
+                }
 
                 OnUploaded(context, Result.FilePath);
             }
@@ -102,12 +104,6 @@ namespace DKD.Core.Upload
         }
     }
 
-    public class UploadResult
-    {
-        public string LocalFileName { get; set; }
-        public string FilePath { get; set; }
-        public string Err { get; set; }
-    }
     public enum UploadState
     {
         Success = 0,

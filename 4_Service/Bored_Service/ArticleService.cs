@@ -73,7 +73,7 @@ namespace Bored.Service
             var config = _configInfoDal.GetAllList();
             foreach (var item in (List<ArticleDto>)data.Data)
             {
-                var configModel = config.FirstOrDefault(t => t.ID == Convert.ToInt32(item.Source));
+                var configModel = config.First(t => t.ID == Convert.ToInt32(item.Source));
                 if (configModel != null)
                     item.SourceTxt = configModel.Name;
             }
