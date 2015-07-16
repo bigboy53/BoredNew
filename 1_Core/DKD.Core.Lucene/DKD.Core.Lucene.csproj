@@ -58,14 +58,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseLucene.cs" />
-    <Compile Include="ILuceneProvider.cs" />
-    <Compile Include="LuceneEnum.cs" />
+    <Compile Include="Internals\BaseLucene.cs" />
+    <Compile Include="Internals\ILuceneProvider.cs" />
+    <Compile Include="Helper\LuceneEnum.cs" />
+    <Compile Include="LuceneException\LuceneException.cs" />
     <Compile Include="LuceneManager.cs" />
-    <Compile Include="LuceneModel.cs" />
-    <Compile Include="LuceneProvider.cs" />
+    <Compile Include="Entity\LuceneModel.cs" />
+    <Compile Include="Internals\LuceneProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SplitContent.cs" />
+    <Compile Include="Helper\SplitContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\2_Framework\DKD.Framework\DKD.Framework.csproj">
@@ -77,6 +78,7 @@
       <Name>DKD.Core.Logger</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

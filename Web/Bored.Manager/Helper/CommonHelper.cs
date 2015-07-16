@@ -12,7 +12,7 @@ namespace Bored.Manager.Helper
 {
     public class CommonHelper
     {
-        #region 静态属性
+        #region 属性
         private static IRolesService RolesBll
         {
             get { return RegisterAutofacFroSingle.CurrentContainer.Resolve<IRolesService>(); }
@@ -62,12 +62,7 @@ namespace Bored.Manager.Helper
         public static List<SelectItem> GetConfigList()
         {
             var data = EnumHelper.GetEnumInfoList(typeof(ConfigTypeEnum.ConfigType));
-            var list = new List<SelectItem>();
-            foreach (var item in data)
-            {
-                list.Add(new SelectItem(item.Description,item.ID));
-            }
-            return list;
+            return data.Select(item => new SelectItem(item.Description, item.ID)).ToList();
         }
 
         public static List<SelectItem> GetConfigByType(ConfigTypeEnum.ConfigType type)

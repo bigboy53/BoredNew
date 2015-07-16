@@ -2,6 +2,10 @@
 
 namespace DKD.Framework.Data.Infrastructure
 {
+    /// <summary>
+    /// 暂时没用到
+    /// </summary>
+    [Obsolete]
     public class Disposable:IDisposable
     {
         private bool isDisposed;

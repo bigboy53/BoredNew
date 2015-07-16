@@ -51,9 +51,9 @@ namespace Bored.Manager.Controllers
         {
             var isExist = _manageUsersBll.IsExist(model.UName);
             if (isExist)
-                return ReturnJson(false, StringConst.Error_Exist);
+                return ReturnJson(false, JsonMsg.Error_Exist);
             var result = _manageUsersBll.Add(model);
-            return ReturnJson(result > 0, StringConst.Error_Add);
+            return ReturnJson(result > 0, JsonMsg.Error_Add);
         }
 
         [ManageFilter(PermissionConst.Edit)]
@@ -62,16 +62,16 @@ namespace Bored.Manager.Controllers
             var oldModel = _manageUsersBll.GetModel(model.ID);
             if (oldModel == null ||
                 (oldModel.UName != model.UName && _manageUsersBll.IsExist(model.UName)))
-                return ReturnJson(false, StringConst.Error_Exist);
+                return ReturnJson(false, JsonMsg.Error_Exist);
             var result = _manageUsersBll.Update(model);
-            return ReturnJson(result, StringConst.Error_Edit);
+            return ReturnJson(result, JsonMsg.Error_Edit);
         }
 
         [ManageFilter(PermissionConst.Delete)]
         public JsonResult Mange_Delete(string id)
         {
             var result = _manageUsersBll.Delete(id);
-            return ReturnJson(result, StringConst.Error_Delete);
+            return ReturnJson(result, JsonMsg.Error_Delete);
         }
         #endregion
 

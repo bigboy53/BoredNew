@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ArticleController.cs" />
     <Compile Include="ConfigInfoController.cs" />
+    <Compile Include="Core\JsonMsg.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="MusicController.cs" />

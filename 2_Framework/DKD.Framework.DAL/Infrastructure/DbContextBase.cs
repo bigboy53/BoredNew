@@ -13,7 +13,7 @@ using PageHelper;
 
 namespace DKD.Framework.Data.Infrastructure
 {
-    public class DbContextBase : DbContext, IDisposable
+    public class DbContextBase : DbContext
     {
         public DbContextBase(string connectionStr)
             : base(connectionStr)
@@ -47,6 +47,10 @@ namespace DKD.Framework.Data.Infrastructure
             return this.Set<T>().Where(where).ToList().Count();
         }
 
+        /// <summary>
+        /// 没用到EntityFramework.Extensions 尽量少用
+        /// </summary>
+        /// <returns></returns>
         public PageData GetPage<T>(int pageIndex, int pageSize, Func<T, object> order, OrderType orderType,
             Func<T, bool> where) where T : BaseModel
         {
@@ -163,19 +167,9 @@ namespace DKD.Framework.Data.Infrastructure
 
         public override int SaveChanges()
         {
-            this.WrieAuditLog();
-            try
-            {
-                return base.SaveChanges();
-            }
-            catch (UpdateException exception)
-            {
-                throw new Exception("添加或更新错误", exception);
-            }
-            catch (Exception exception)
-            {
-                throw new Exception("SaveChanges()错误", exception);
-            }
+            //暂时不在此处写操作日志
+            //this.WrieAuditLog();
+            return base.SaveChanges();
         }
 
         internal void WrieAuditLog()
@@ -185,10 +179,12 @@ namespace DKD.Framework.Data.Infrastructure
 
             foreach (var dbEntry in this.ChangeTracker.Entries<BaseModel>().Where(p => p.State == EntityState.Added || p.State == EntityState.Deleted || p.State == EntityState.Modified))
             {
-                var auditableAttr = dbEntry.Entity.GetType().GetCustomAttributes(typeof(AuditableAttribute), false).SingleOrDefault() as AuditableAttribute;
+                var auditableAttr =
+                    dbEntry.Entity.GetType().GetCustomAttributes(typeof (AuditableAttribute), false).SingleOrDefault()
+                        as AuditableAttribute;
                 if (auditableAttr == null)
                     continue;
-
+                //操作人名称
                 var operaterName = "";
 
                 var entry = dbEntry;

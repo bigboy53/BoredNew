@@ -54,7 +54,7 @@ namespace Bored.Manager.Controllers
         public JsonResult Article_Add(ArticleDto model)
         {
             var result = _articleBll.Add(model);
-            return ReturnJson(result > 0, StringConst.Error_Add);
+            return ReturnJson(result > 0, JsonMsg.Error_Add);
         }
 
         [ManageFilter(PermissionConst.Edit)]
@@ -62,14 +62,14 @@ namespace Bored.Manager.Controllers
         public JsonResult Article_Edit(ArticleDto model)
         {
             var result = _articleBll.Update(model);
-            return ReturnJson(result, StringConst.Error_Edit);
+            return ReturnJson(result, JsonMsg.Error_Edit);
         }
 
         [ManageFilter(PermissionConst.Delete)]
         public JsonResult Article_Delete(string id)
         {
             var result = _articleBll.Delete(id);
-            return ReturnJson(result, StringConst.Error_Delete);
+            return ReturnJson(result, JsonMsg.Error_Delete);
         }
         #endregion
 

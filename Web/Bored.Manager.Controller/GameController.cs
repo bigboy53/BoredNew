@@ -48,21 +48,21 @@ namespace Bored.Manager.Controllers
         public JsonResult Game_Add(GameDto model)
         {
             var result = _gameBll.Add(model);
-            return ReturnJson(result > 0, StringConst.Error_Add);
+            return ReturnJson(result > 0, JsonMsg.Error_Add);
         }
 
         [ManageFilter(PermissionConst.Edit)]
         public JsonResult Game_Edit(GameDto model)
         {
             var result = _gameBll.Update(model);
-            return ReturnJson(result, StringConst.Error_Edit);
+            return ReturnJson(result, JsonMsg.Error_Edit);
         }
 
         [ManageFilter(PermissionConst.Delete)]
         public JsonResult Game_Delete(string id)
         {
             var result = _gameBll.Delete(id);
-            return ReturnJson(result, StringConst.Error_Delete);
+            return ReturnJson(result, JsonMsg.Error_Delete);
         }
         #endregion
     }

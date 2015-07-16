@@ -37,7 +37,7 @@ namespace Bored.Service
                         return rootpath + newPath;
                     }
                     //打日志 覆盖图片失败
-                    LoggerHelper.Logger(string.Format(StringConst.Error_FileMove, "（不影响程序），图片地址：" + imageUrl,
+                    LoggerHelper.Logger(string.Format(CommonConst.Error_FileMove, "（不影响程序），图片地址：" + imageUrl,
                         "类：BllHelper.cs方法：RemoveImg "));
                     return imageUrl;
                 }
@@ -45,7 +45,7 @@ namespace Bored.Service
             }
             catch (Exception e)
             {
-                LoggerHelper.Logger(string.Format(StringConst.Error_FileDelete, e.Message, "类：BllHelper.cs方法：RemoveImg "));
+                LoggerHelper.Logger(string.Format(CommonConst.Error_FileDelete, e.Message, "类：BllHelper.cs方法：RemoveImg "));
             }
             return imageUrl;
         }

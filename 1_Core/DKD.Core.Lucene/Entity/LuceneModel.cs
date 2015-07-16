@@ -15,6 +15,7 @@ namespace DKD.Core.Lucene
         public string Title { get; set; }
         /// <summary>
         /// 内容
+        /// 
         /// </summary>
         public string Content { get; set; }
         /// <summary>

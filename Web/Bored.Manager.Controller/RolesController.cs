@@ -52,7 +52,7 @@ namespace Bored.Manager.Controllers
         {
             var isExist = _rolesBll.IsExist(roleName);
             if(isExist)
-                return ReturnJson(false, StringConst.Error_Exist);
+                return ReturnJson(false, JsonMsg.Error_Exist);
             var permission = new List<RolePermissionDto>();
             foreach (var item in actionName.Split(','))
             {
@@ -60,7 +60,7 @@ namespace Bored.Manager.Controllers
             }
             var result =
                 _rolesBll.Add(new RolesDto { RoleLock = (roleLock ?? 0) == 1, RoleName = roleName, RolePermission = permission });
-            return ReturnJson(result > 0, StringConst.Error_Add);
+            return ReturnJson(result > 0, JsonMsg.Error_Add);
         }
         [ManageFilter(PermissionConst.Edit)]
         public JsonResult Roles_Edit(int? roleLock, string roleName, string actionName,int rid)
@@ -68,7 +68,7 @@ namespace Bored.Manager.Controllers
             var oldModel = _rolesBll.GetModel(rid);
             if (oldModel == null ||
                 (oldModel.RoleName != roleName && _rolesBll.IsExist(roleName)))
-                return ReturnJson(false, StringConst.Error_Exist);
+                return ReturnJson(false, JsonMsg.Error_Exist);
             var permission = new List<RolePermissionDto>();
             foreach (var item in actionName.Split(','))
             {
@@ -83,7 +83,7 @@ namespace Bored.Manager.Controllers
                     RolePermission = permission,
                     CreateTime = oldModel.CreateTime
                 });
-            return ReturnJson(result, StringConst.Error_Edit);
+            return ReturnJson(result, JsonMsg.Error_Edit);
         }
         public JsonResult Roles_GetPremission(int rid)
         {

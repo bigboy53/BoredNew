@@ -48,21 +48,21 @@ namespace Bored.Manager.Controllers
         public JsonResult Music_Add(MusicDto model)
         {
             var result = _musicBll.Add(model);
-            return ReturnJson(result > 0, StringConst.Error_Add);
+            return ReturnJson(result > 0, JsonMsg.Error_Add);
         }
 
         [ManageFilter(PermissionConst.Edit)]
         public JsonResult Music_Edit(MusicDto model)
         {
             var result = _musicBll.Update(model);
-            return ReturnJson(result, StringConst.Error_Edit);
+            return ReturnJson(result, JsonMsg.Error_Edit);
         }
 
         [ManageFilter(PermissionConst.Delete)]
         public JsonResult Music_Delete(string id)
         {
             var result = _musicBll.Delete(id);
-            return ReturnJson(result, StringConst.Error_Delete);
+            return ReturnJson(result, JsonMsg.Error_Delete);
         }
         #endregion
 

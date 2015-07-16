@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheManager.cs" />
-    <Compile Include="Caching.cs" />
-    <Compile Include="ICacheProvider.cs" />
-    <Compile Include="LocalCacheProvider.cs" />
+    <Compile Include="Internals\Caching.cs" />
+    <Compile Include="Internals\ICacheProvider.cs" />
+    <Compile Include="Internals\LocalCacheProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

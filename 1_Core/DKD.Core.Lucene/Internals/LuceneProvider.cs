@@ -15,6 +15,7 @@ namespace DKD.Core.Lucene
 {
     public class LuceneProvider : BaseLucene, ILuceneProvider
     {
+
         public void Add(LuceneModel model)
         {
             model.IndexType = LuceneType.Insert;
@@ -46,6 +47,7 @@ namespace DKD.Core.Lucene
         public List<LuceneModel> GetList(string keyword,int? type, int pageIndex, int pageSize, out int dataCount)
         {
             dataCount = 0;
+            var result = new List<LuceneModel>();
             try
             {
                 var ky = keyword;
@@ -99,47 +101,60 @@ namespace DKD.Core.Lucene
                 else
                     dataCount = docs.totalHits;
                 int i = (pageIndex - 1) * pageSize;
-                var result = new List<LuceneModel>();
                 while (i < dataCount && result.Count < pageSize)
                 {
                     var model = new LuceneModel();
                     Document doc = searcher.Doc(docs.scoreDocs[i].doc);
-                    try
-                    {
-                        model.Content = doc.Get("content");
-                        model.HightLightContent = SplitContent.HightLight(ky, doc.Get("content"));
-                        model.Title = doc.Get("title");
-                        model.HightLightTitle = SplitContent.HightLight(ky, doc.Get("title"));
-                        model.ID = Convert.ToInt32(doc.Get("id"));
-                        model.ClickCount = Convert.ToInt32(doc.Get("clickcount"));
-                        model.Images = doc.Get("images");
-                        model.Tags = doc.Get("tags");
-                        model.Type = Convert.ToInt32(doc.Get("type"));
-                        model.CreateTime = DateTimeExtension.UnixToDateTime(Convert.ToInt32(doc.Get("createtime")));
-                        result.Add(model);
-                    }
-                    catch (Exception e)
-                    {
-                        try
-                        {
-                            LoggerHelper.Logger(
-                                string.Format("Lucene搜索错误：ID:{0},Type:{1},Title:{2},CreateTime:{3}", doc.Get("id"),
-                                    doc.Get("type"), doc.Get("title"), doc.Get("createtime")), e);
-                        }
-                        catch { }
-                    }
-                    finally
-                    {
-                        i++;
-                    }
+
+                    model.Content = doc.Get("content");
+                    model.HightLightContent = SplitContent.HightLight(ky, doc.Get("content"));
+                    model.Title = doc.Get("title");
+                    model.HightLightTitle = SplitContent.HightLight(ky, doc.Get("title"));
+                    model.ID = Convert.ToInt32(doc.Get("id"));
+                    model.ClickCount = Convert.ToInt32(doc.Get("clickcount"));
+                    model.Images = doc.Get("images");
+                    model.Tags = doc.Get("tags");
+                    model.Type = Convert.ToInt32(doc.Get("type"));
+                    model.CreateTime = DateTimeExtension.UnixToDateTime(Convert.ToInt32(doc.Get("createtime")));
+                    result.Add(model);
+
+                    #region 循环中有try catch 非常消耗性能 解决方案 报错不处理
+                    //try
+                    //{
+                    //    model.Content = doc.Get("content");
+                    //    model.HightLightContent = SplitContent.HightLight(ky, doc.Get("content"));
+                    //    model.Title = doc.Get("title");
+                    //    model.HightLightTitle = SplitContent.HightLight(ky, doc.Get("title"));
+                    //    model.ID = Convert.ToInt32(doc.Get("id"));
+                    //    model.ClickCount = Convert.ToInt32(doc.Get("clickcount"));
+                    //    model.Images = doc.Get("images");
+                    //    model.Tags = doc.Get("tags");
+                    //    model.Type = Convert.ToInt32(doc.Get("type"));
+                    //    model.CreateTime = DateTimeExtension.UnixToDateTime(Convert.ToInt32(doc.Get("createtime")));
+                    //    result.Add(model);
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    LoggerHelper.Logger(
+                    //        string.Format("Lucene搜索错误：ID:{0},Type:{1},Title:{2},CreateTime:{3}", doc.Get("id"),
+                    //            doc.Get("type"), doc.Get("title"), doc.Get("createtime")), e);
+                    //}
+                    //finally
+                    //{
+                    //    i++;
+                    //}
+                    #endregion
+
+                    i++;
+
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                LoggerHelper.Logger("Lucene搜索错误", ex);
+                LoggerHelper.Logger("Lucene中GetList()错误", ex);
+                throw new LuceneException.LuceneException("Lucene中GetList()错误",ex);
             }
-            return new List<LuceneModel>();
         }
 
     }

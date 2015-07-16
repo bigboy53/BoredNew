@@ -48,21 +48,21 @@ namespace Bored.Manager.Controllers
         public JsonResult Video_Add(VideoDto model)
         {
             var result = _videoBll.Add(model);
-            return ReturnJson(result > 0, StringConst.Error_Add);
+            return ReturnJson(result > 0, JsonMsg.Error_Add);
         }
 
         [ManageFilter(PermissionConst.Edit)]
         public JsonResult Video_Edit(VideoDto model)
         {
             var result = _videoBll.Update(model);
-            return ReturnJson(result, StringConst.Error_Edit);
+            return ReturnJson(result, JsonMsg.Error_Edit);
         }
 
         [ManageFilter(PermissionConst.Delete)]
         public JsonResult Video_Delete(string id)
         {
             var result = _videoBll.Delete(id);
-            return ReturnJson(result, StringConst.Error_Delete);
+            return ReturnJson(result, JsonMsg.Error_Delete);
         }
         #endregion
     }

@@ -13,8 +13,13 @@ namespace DKD.Core.Lucene
 {
     public abstract class BaseLucene
     {
-        protected static readonly string LucenePath = HttpContext.Current.Server.MapPath("/Lucene/IndexData");
+        public static string LucenePath { get; private set; }
 
+        static BaseLucene()
+        {
+            LucenePath = HttpContext.Current.Server.MapPath("/Lucene/IndexData");
+        }
+        
         public ConcurrentQueue<LuceneModel> LuceneModels = new ConcurrentQueue<LuceneModel>();
 
         protected virtual void QueueToLucene(object para)
@@ -49,64 +54,23 @@ namespace DKD.Core.Lucene
             //补充:使用IndexWriter打开directory时会自动对索引库文件上锁
             var writer = new IndexWriter(directory, new PanGuAnalyzer(), !isExist, IndexWriter.MaxFieldLength.UNLIMITED);
             //--------------------------------遍历数据源 将数据转换成为文档对象 存入索引库
-            LuceneModel model;
             while (!LuceneModels.IsEmpty)
             {
+                LuceneModel model;
                 LuceneModels.TryDequeue(out model);
                 if(model==null||model.ID<=0)
                     continue;
-                var document = new Document();//new一篇文档对象 --一条记录对应索引库中的一个文档
                 if (model.IndexType == LuceneType.Insert)
                 {
-                    //向文档中添加字段  Add(字段,值,是否保存字段原始值,是否针对该列创建索引)
-                    //--所有字段的值都将以字符串类型保存 因为索引库只存储字符串类型数据
-                    document.Add(new Field("id", model.ID.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    //Field.Store:表示是否保存字段原值。指定Field.Store.YES的字段在检索时才能用document.Get取出原值  
-                    //Field.Index.NOT_ANALYZED:指定不按照分词后的结果保存--是否按分词后结果保存取决于是否对该列内容进行模糊查询
-                    document.Add(new NumericField("type", Field.Store.YES, true).SetIntValue(model.Type));
-                    document.Add(new Field("title", model.Title, Field.Store.YES, Field.Index.ANALYZED,
-                        Field.TermVector.WITH_POSITIONS_OFFSETS));
-                    //Field.Index.ANALYZED:指定文章内容按照分词后结果保存 否则无法实现后续的模糊查询 
-                    //WITH_POSITIONS_OFFSETS:指示不仅保存分割后的词 还保存词之间的距离
-                    if (!string.IsNullOrEmpty(model.Content))
-                        document.Add(new Field("content", model.Content, Field.Store.YES, Field.Index.ANALYZED,
-                            Field.TermVector.WITH_POSITIONS_OFFSETS));
-                    document.Add(
-                        new NumericField("createtime", Field.Store.YES, true).SetIntValue(
-                            DateTimeExtension.DateTimeToUnix(model.CreateTime)));
-                    if (!string.IsNullOrEmpty(model.Images))
-                        document.Add(new Field("images", model.Images, Field.Store.YES, Field.Index.NO));
-                    if (!string.IsNullOrEmpty(model.Tags))
-                        document.Add(new Field("tags", model.Tags, Field.Store.YES, Field.Index.ANALYZED,
-                            Field.TermVector.WITH_POSITIONS_OFFSETS));
-                    document.Add(new NumericField("clickcount", Field.Store.YES, true).SetIntValue(model.ClickCount));
-                    writer.AddDocument(document);//文档写入索引库
+                    InsertData(model,writer);
                 }
                 else if (model.IndexType == LuceneType.Delete)
                 {
-                    writer.DeleteDocuments(new[] { new Term("id", model.ID.ToString()), new Term("type", model.Type.ToString()) });
+                    DeleteData(model,writer);
                 }
                 else if (model.IndexType == LuceneType.Modify)
                 {
-                    //先删除 再新增
-                    writer.DeleteDocuments(new[] { new Term("id", model.ID.ToString()), new Term("type", model.Type.ToString()) });
-                    document.Add(new Field("id", model.ID.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    document.Add(new NumericField("type", Field.Store.YES, true).SetIntValue(model.Type));
-                    document.Add(new Field("title", model.Title, Field.Store.YES, Field.Index.ANALYZED,
-                        Field.TermVector.WITH_POSITIONS_OFFSETS));
-                    if (!string.IsNullOrEmpty(model.Content))
-                        document.Add(new Field("content", model.Content, Field.Store.YES, Field.Index.ANALYZED,
-                            Field.TermVector.WITH_POSITIONS_OFFSETS));
-                    document.Add(
-                        new NumericField("createtime", Field.Store.YES, true).SetIntValue(
-                            DateTimeExtension.DateTimeToUnix(model.CreateTime)));
-                    if (!string.IsNullOrEmpty(model.Images))
-                        document.Add(new Field("images", model.Images, Field.Store.YES, Field.Index.NO));
-                    if (!string.IsNullOrEmpty(model.Tags))
-                        document.Add(new Field("tags", model.Tags, Field.Store.YES, Field.Index.ANALYZED,
-                            Field.TermVector.WITH_POSITIONS_OFFSETS));
-                    document.Add(new NumericField("clickcount", Field.Store.YES, true).SetIntValue(model.ClickCount));
-                    writer.AddDocument(document);
+                    ModifyData(model,writer);
                 }
             }
 
@@ -170,10 +134,51 @@ namespace DKD.Core.Lucene
             //}
             #endregion
 
-
             writer.Close();//会自动解锁
             directory.Close(); //不要忘了Close，否则索引结果搜不到
         }
+
+        #region 操作
+        private void InsertData(LuceneModel model, IndexWriter writer)
+        {
+            var document = new Document();//new一篇文档对象 --一条记录对应索引库中的一个文档
+
+            //向文档中添加字段  Add(字段,值,是否保存字段原始值,是否针对该列创建索引)
+            //--所有字段的值都将以字符串类型保存 因为索引库只存储字符串类型数据
+            document.Add(new Field("id", model.ID.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            //Field.Store:表示是否保存字段原值。指定Field.Store.YES的字段在检索时才能用document.Get取出原值  
+            //Field.Index.NOT_ANALYZED:指定不按照分词后的结果保存--是否按分词后结果保存取决于是否对该列内容进行模糊查询
+            document.Add(new NumericField("type", Field.Store.YES, true).SetIntValue(model.Type));
+            document.Add(new Field("title", model.Title, Field.Store.YES, Field.Index.ANALYZED,
+                Field.TermVector.WITH_POSITIONS_OFFSETS));
+            //Field.Index.ANALYZED:指定文章内容按照分词后结果保存 否则无法实现后续的模糊查询 
+            //WITH_POSITIONS_OFFSETS:指示不仅保存分割后的词 还保存词之间的距离
+            if (!string.IsNullOrEmpty(model.Content))
+                document.Add(new Field("content", model.Content, Field.Store.YES, Field.Index.ANALYZED,
+                    Field.TermVector.WITH_POSITIONS_OFFSETS));
+            document.Add(
+                new NumericField("createtime", Field.Store.YES, true).SetIntValue(
+                    DateTimeExtension.DateTimeToUnix(model.CreateTime)));
+            if (!string.IsNullOrEmpty(model.Images))
+                document.Add(new Field("images", model.Images, Field.Store.YES, Field.Index.NO));
+            if (!string.IsNullOrEmpty(model.Tags))
+                document.Add(new Field("tags", model.Tags, Field.Store.YES, Field.Index.ANALYZED,
+                    Field.TermVector.WITH_POSITIONS_OFFSETS));
+            document.Add(new NumericField("clickcount", Field.Store.YES, true).SetIntValue(model.ClickCount));
+            writer.AddDocument(document);
+        }
+
+        private void DeleteData(LuceneModel model, IndexWriter writer)
+        {
+            writer.DeleteDocuments(new[] {new Term("id", model.ID.ToString()), new Term("type", model.Type.ToString())});
+        }
+
+        private void ModifyData(LuceneModel model, IndexWriter writer)
+        {
+            DeleteData(model, writer);
+            InsertData(model,writer);
+        }
+        #endregion
 
         public virtual void DeleteAll()
         {
@@ -197,6 +202,5 @@ namespace DKD.Core.Lucene
             writer.Close();//会自动解锁
             directory.Close(); //不要忘了Close，否则索引结果搜不到
         }
-
     }
 }
