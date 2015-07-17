@@ -1,5 +1,6 @@
 ﻿@using Bored.Manager.Helper
 @using PageHelper
+@using Bored.Manager.Core
 @{
     Layout = "~/Views/Shared/Main_LayoutPage.cshtml";
     var pageModel = PageStruct.InitList("ConfigInfo", Url.Action("ConfigInfoEdit", "ConfigInfo"), Url.Action("ConfigInfo_List", "ConfigInfo"), Url.Action("ConfigInfo_Delete", "ConfigInfo"));

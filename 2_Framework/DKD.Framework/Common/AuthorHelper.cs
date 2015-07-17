@@ -21,7 +21,7 @@ namespace DKD.Framework.Common
         /// <param name="isManage">为True表示获取管理员否则为前台用户</param>
         public static void SetAuthorInfo(Object source, bool isManage)
         {
-            FrameworkConfig config = FrameworkConfig.Instance<FrameworkConfig>();
+            var config = ConfigBase.Instance<FrameworkConfig>();
 
             if (isManage)
                 SetOwnData(config.ManageAuthorKey, source);
@@ -36,7 +36,7 @@ namespace DKD.Framework.Common
         /// <param name="isManage">为True表示获取管理员否则为前台用户</param>
         public static void ClearAuthorInfo(bool isManage)
         {
-            FrameworkConfig config = FrameworkConfig.Instance<FrameworkConfig>();
+            var config = ConfigBase.Instance<FrameworkConfig>();
 
             if (isManage)
                 ClearOwnData(config.ManageAuthorKey);
@@ -52,10 +52,10 @@ namespace DKD.Framework.Common
         /// <returns></returns>
         public static object GetOwnData(string key)
         {
-            object result = null;
-            if (FrameworkConfig.Instance<FrameworkConfig>().IsSessionAuthor)
+            object result;
+            if (ConfigBase.Instance<FrameworkConfig>().IsSessionAuthor)
 
-                result = HttpContext.Current.Session[key] ?? null;
+                result = HttpContext.Current.Session[key];
             else
                 result = HttpContext.Current.Request.Cookies[key] == null || string.IsNullOrEmpty(HttpContext.Current.Request.Cookies[key].Value) ? null : HttpUtility.UrlDecode(HttpContext.Current.Request.Cookies[key].Value, Encoding.UTF8).Decrypt();
             return result;
@@ -69,7 +69,7 @@ namespace DKD.Framework.Common
         public static void SetOwnData(string key, object source)
         {
 
-            FrameworkConfig config = FrameworkConfig.Instance<FrameworkConfig>();
+            var config = ConfigBase.Instance<FrameworkConfig>();
 
             if (config.IsSessionAuthor)
                 HttpContext.Current.Session[key] = source;
@@ -93,7 +93,7 @@ namespace DKD.Framework.Common
         /// <param name="key"></param>
         public static void ClearOwnData(string key)
         {
-            FrameworkConfig config = FrameworkConfig.Instance<FrameworkConfig>();
+            var config = ConfigBase.Instance<FrameworkConfig>();
             if (config.IsSessionAuthor)
                 HttpContext.Current.Session.Remove(key);
             else
@@ -126,8 +126,8 @@ namespace DKD.Framework.Common
         /// <returns>当前用户登陆名，当没有用户时为空</returns>
         public static object GetAuthorInfo(bool isManage)
         {
-            object result = null;
-            FrameworkConfig config = FrameworkConfig.Instance<FrameworkConfig>();
+            object result;
+            var config = ConfigBase.Instance<FrameworkConfig>();
             if (isManage)
                 result = GetOwnData(config.ManageAuthorKey);
             else

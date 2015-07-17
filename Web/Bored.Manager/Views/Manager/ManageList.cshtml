@@ -1,5 +1,5 @@
-﻿@using Bored.Manager.Helper
-@using PageHelper
+﻿@using PageHelper
+@using Bored.Manager.Core
 @{
     Layout = "~/Views/Shared/Main_LayoutPage.cshtml";
     var pageModel = PageStruct.InitList("manager", Url.Action("ManageEdit", "Manager"), Url.Action("Manage_List", "Manager"), Url.Action("Mange_Delete", "Manager"));

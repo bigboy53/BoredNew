@@ -2,10 +2,10 @@
 
 namespace DKD.Framework.Const
 {
-    public class CacheKey
+    public class GlobalCacheKey
     {
         /// <summary>
-        /// 权限(0:角色ID)
+        /// 权限 (0:角色ID)
         /// </summary>
         public const String RolePermission = "RolePermission_{0}";
         /// <summary>

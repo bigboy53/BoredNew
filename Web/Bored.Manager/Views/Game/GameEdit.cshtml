@@ -1,6 +1,7 @@
 ﻿@using Bored.Manager.Helper
 @using DKD.Framework.Contract.Enum
 @using PageHelper
+@using Bored.Manager.Core
 @{
     var pageModel = PageStruct.InitEdit("Game_edit", Url.Action("Game_Add", "Game"), Url.Action("Game_Edit", "Game"), Url.Action("Game_Model", "Game"));
     var id = pageModel.GetModifyId("id");

@@ -1,5 +1,5 @@
-﻿@using Bored.Manager.Helper
-@using PageHelper
+﻿@using PageHelper
+@using Bored.Manager.Core
 @{
     Layout = "~/Views/Shared/Main_LayoutPage.cshtml";
     var pageModel = PageStruct.InitList("Music", Url.Action("MusicEdit", "Music"), Url.Action("Music_List", "Music"), Url.Action("Music_Delete", "Music"));

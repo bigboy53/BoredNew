@@ -35,7 +35,7 @@ namespace DKD.Framework.Filter
         /// 默认：Description=Name , IsAuthorize=true
         /// </summary>
         /// <param name="actionName">权限名</param>
-        public ActionInfoAttribute(string actionName)
+        protected ActionInfoAttribute(string actionName)
         {
             Name = actionName;
             Description = actionName;
@@ -45,7 +45,7 @@ namespace DKD.Framework.Filter
         /// <summary>
         /// 默认：Description="" , IsAuthorize=false
         /// </summary>
-        public ActionInfoAttribute()
+        protected ActionInfoAttribute()
         {
             Name = "";
             Description = "";

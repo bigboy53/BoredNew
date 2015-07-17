@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Net.Mail;
 using System.Net;
+using System.Threading.Tasks;
+using DKD.Framework.Logger;
 
 namespace DKD.Framework.Message
 {
@@ -11,7 +12,7 @@ namespace DKD.Framework.Message
     /// </summary>
     public class Email
     {
-        private Config.FrameworkConfig config = Config.ConfigBase.Instance<Config.FrameworkConfig>();
+        private readonly Config.FrameworkConfig _config = Config.ConfigBase.Instance<Config.FrameworkConfig>();
 
         /// <summary>
         /// 发送电子邮件 ，格式为HTML模式 True:隐密模式 False:不是隐密模式
@@ -21,9 +22,9 @@ namespace DKD.Framework.Message
         /// <param name="from">发送人</param>
         /// <param name="toUser">接收人</param>
         /// <returns></returns>
-        public bool SendMail(string title, string body, EmailAddress from, EmailAddress toUser)
+        public void SendMail(string title, string body, EmailAddress from, EmailAddress toUser)
         {
-            return SendMail(title, body, from, new List<EmailAddress> { toUser }, false);
+             SendMail(title, body, from, new List<EmailAddress> { toUser }, false);
         }
 
         /// <summary>
@@ -35,9 +36,9 @@ namespace DKD.Framework.Message
         /// <param name="toUser">接收人</param>
         /// <param name="isPrivate">是否隐密模式</param>
         /// <returns></returns>
-        public bool SendMail(string title, string body, EmailAddress from, EmailAddress toUser, bool isPrivate)
+        public void SendMail(string title, string body, EmailAddress from, EmailAddress toUser, bool isPrivate)
         {
-            return SendMail(title, body, from, new List<EmailAddress> { toUser }, isPrivate);
+             SendMail(title, body, from, new List<EmailAddress> { toUser }, isPrivate);
         }
 
         /// <summary>
@@ -50,9 +51,9 @@ namespace DKD.Framework.Message
         /// <param name="isPrivate">是否隐密模式</param>
         /// <param name="isSsl">是否启用ssl</param>
         /// <returns></returns>
-        public bool SendMail(string title, string body, EmailAddress from, EmailAddress toUser, bool isPrivate, bool isSsl)
+        public void SendMail(string title, string body, EmailAddress from, EmailAddress toUser, bool isPrivate, bool isSsl)
         {
-            return SendMail(title, body, from, new List<EmailAddress> { toUser }, isPrivate, isSsl);
+             SendMail(title, body, from, new List<EmailAddress> { toUser }, isPrivate, isSsl);
         }
 
         /// <summary>
@@ -64,9 +65,9 @@ namespace DKD.Framework.Message
         /// <param name="toUsers">收件人地址</param>
         /// <param name="isPrivate">是否隐密模式</param>
         /// <returns></returns>
-        public bool SendMail(string title, string body, EmailAddress from, List<EmailAddress> toUsers, bool isPrivate)
+        public void SendMail(string title, string body, EmailAddress from, List<EmailAddress> toUsers, bool isPrivate)
         {
-            return SendMail(title, body, from, toUsers, isPrivate, true);
+             SendMail(title, body, from, toUsers, isPrivate, true);
         }
 
         /// <summary>
@@ -79,28 +80,23 @@ namespace DKD.Framework.Message
         /// <param name="isPrivate">是否隐密模式</param>
         /// <param name="isSsl">是不启用ssl</param>
         /// <returns></returns>
-        public bool SendMail(string title, string body, EmailAddress from, List<EmailAddress> toUsers, bool isPrivate, bool isSsl)
+        public void SendMail(string title, string body, EmailAddress from, List<EmailAddress> toUsers, bool isPrivate, bool isSsl)
         {
-            if (toUsers == null || toUsers.Count == 0)
-                return false;
-
-            try
+            Task.Factory.StartNew(() =>
             {
+                if (toUsers == null || toUsers.Count == 0)
+                    throw new EmailException("发送人为空");
                 var msg = new MailMessage();
-                msg.From = from.Address == null ? new MailAddress(config.EmailUser) : new MailAddress(from.Address, from.ShowName);
+                msg.From = from.Address == null
+                    ? new MailAddress(_config.EmailUser)
+                    : new MailAddress(from.Address, from.ShowName);
 
                 if (isPrivate)
 
-                    toUsers.ForEach(delegate(EmailAddress ea)
-                    {
-                        msg.Bcc.Add(new MailAddress(ea.Address, ea.ShowName));
-                    });
+                    toUsers.ForEach(ea => msg.Bcc.Add(new MailAddress(ea.Address, ea.ShowName)));
 
                 else
-                    toUsers.ForEach(delegate(EmailAddress ea)
-                    {
-                        msg.To.Add(new MailAddress(ea.Address, ea.ShowName));
-                    });
+                    toUsers.ForEach(ea => msg.To.Add(new MailAddress(ea.Address, ea.ShowName)));
 
                 msg.Subject = title;
                 msg.SubjectEncoding = Encoding.UTF8;
@@ -112,21 +108,23 @@ namespace DKD.Framework.Message
 
                 msg.IsBodyHtml = true;
 
-                SmtpClient scMailServer = new SmtpClient();
+                var scMailServer = new SmtpClient();
                 scMailServer.DeliveryMethod = SmtpDeliveryMethod.Network;
-                scMailServer.Credentials = new NetworkCredential(config.EmailUser, config.EmailPassword);
-                scMailServer.Host = config.EmailHost;
-                scMailServer.Port = config.EmailPort;
+                scMailServer.Credentials = new NetworkCredential(_config.EmailUser, _config.EmailPassword);
+                scMailServer.Host = _config.EmailHost;
+                scMailServer.Port = _config.EmailPort;
                 scMailServer.EnableSsl = isSsl;
 
                 scMailServer.Send(msg);
                 return true;
-            }
-            catch (Exception ex)
+            }).ContinueWith(t =>
             {
-                throw new Exception("电子邮件发送出错",ex);
-            }
-
+                if (t.Exception != null)
+                {
+                    LoggerHelper.Logger("电子邮件发送出错", t.Exception);
+                    //throw new EmailException("电子邮件发送出错", ex);
+                }
+            });
         }
 
     }

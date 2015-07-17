@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace DKD.Framework.Extensions
 {
@@ -10,96 +10,27 @@ namespace DKD.Framework.Extensions
     /// <summary>
     ///Enum Label
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    public sealed class EnumLabelAttribute : Attribute
-    {
-        private string _label;
-
-        /// <summary>
-        /// label  that showed;
-        /// </summary>
-        public string Label
-        {
-            get
-            {
-                return this._label;
-            }
-        }
-
-        public EnumLabelAttribute(string label)
-        {
-            this._label = label;
-        }
-    }
     public class EnumHelper
     {
-        private static Dictionary<string, Dictionary<int, string>> _EnumList = new Dictionary<string, Dictionary<int, string>>(); //枚举缓存池
 
-        /// <summary>
-        /// bind source for ListControl;ex:DropDown,ListBox;
-        /// </summary>
-        /// <param name="listControl"></param>
-        /// <param name="enumType"></param>
-        public static void BindListControl(ListControl listControl, Type enumType)
+        private static readonly Dictionary<string, Dictionary<int, string>> EnumList; //枚举缓存池
+        static EnumHelper()
         {
-            listControl.Items.Clear();
-            listControl.DataSource = EnumToDictionary(enumType);
-            listControl.DataValueField = "key";
-            listControl.DataTextField = "value";
-            listControl.DataBind();
+            EnumList = new Dictionary<string, Dictionary<int, string>>();
         }
 
         /// <summary>
         /// make sure to Convert enum to Dictionary;
         /// </summary>
         /// <param name="enumType"></param>
-        /// <returns></returns>
-        public static Dictionary<int, string> EnumToDictionary(Type enumType)
-        {
-            string keyName = enumType.FullName;
-
-            if (!_EnumList.ContainsKey(keyName))
-            {
-                Dictionary<int, string> list = new Dictionary<int, string>();
-
-                foreach (int i in Enum.GetValues(enumType))
-                {
-                    string name = Enum.GetName(enumType, i);
-                    string label = name;
-                    object[] atts = enumType.GetField(name).GetCustomAttributes(typeof(EnumLabelAttribute), false);
-                    if (atts.Length > 0) label = ((EnumLabelAttribute)atts[0]).Label;
-
-                    list.Add(i, label);
-                }
-
-                object obj = new object();
-
-                if (!_EnumList.ContainsKey(keyName))
-                {
-                    lock (obj)
-                    {
-                        if (!_EnumList.ContainsKey(keyName))
-                        {
-                            _EnumList.Add(keyName, list);
-                        }
-                    }
-                }
-            }
-
-            return _EnumList[keyName];
-        }
-
-        /// <summary>
-        /// make sure to Convert enum to Dictionary;
-        /// </summary>
-        /// <param name="enumType"></param>
+        /// <param name="isGetDesc"></param>
         /// <returns></returns>
         public static Dictionary<int, string> EnumToDictionary(Type enumType, bool isGetDesc)
         {
             string keyName = enumType.GUID.ToString();
-            if (!_EnumList.ContainsKey(keyName))
+            if (!EnumList.ContainsKey(keyName))
             {
-                Dictionary<int, string> list = new Dictionary<int, string>();
+                var list = new Dictionary<int, string>();
 
                 foreach (int i in Enum.GetValues(enumType))
                 {
@@ -107,43 +38,48 @@ namespace DKD.Framework.Extensions
                     string label = name;
                     if (isGetDesc)
                     {
-                        object[] atts = enumType.GetField(name).GetCustomAttributes(typeof(DescriptionAttribute), true);
+                        var atts = enumType.GetField(name).GetCustomAttributes(typeof(DescriptionAttribute), true);
                         if (atts.Length > 0) label = ((DescriptionAttribute)atts[0]).Description;
                     }
                     list.Add(i, label);
 
                 }
-                object obj = new object();
+                var obj = new object();
 
-                if (!_EnumList.ContainsKey(keyName))
+                if (!EnumList.ContainsKey(keyName))
                 {
                     lock (obj)
                     {
-                        if (!_EnumList.ContainsKey(keyName))
+                        if (!EnumList.ContainsKey(keyName))
                         {
-                            _EnumList.Add(keyName, list);
+                            EnumList.Add(keyName, list);
                         }
                     }
                 }
             }
 
-            return _EnumList[keyName];
+            return EnumList[keyName];
         }
 
         /// <summary>
-        /// get the enum type's label;
+        /// 根据枚举类型获取描述列表
         /// </summary>
         /// <param name="enumType"></param>
-        /// <param name="intValue"></param>
         /// <returns></returns>
-        public static string GetEnumLabel(Type enumType, int intValue)
+        public static List<EnumInfo> GetEnumInfoList(Type enumType)
         {
-            var d = EnumToDictionary(enumType);
-            if (d.ContainsKey(intValue))
+            var list = new List<EnumInfo>();
+            var descDic = EnumToDictionary(enumType, false);
+            foreach (var item in descDic)
             {
-                return d[intValue];
+                var info = new EnumInfo
+                {
+                    ID = item.Key.ToString(), 
+                    Description = item.Value
+                };
+                list.Add(info);
             }
-            return string.Empty;
+            return list;
         }
 
         /// <summary>
@@ -179,65 +115,6 @@ namespace DKD.Framework.Extensions
         }
 
         /// <summary>
-        /// get value from label,ignorecase:true
-        /// </summary>
-        /// <param name="enumType"></param>
-        /// <param name="label"></param>
-        /// <returns></returns>
-        public int GetEnumValue(Type enumType, string label)
-        {
-            return GetEnumValue(enumType, label, true);
-        }
-
-        /// <summary>
-        /// get value from label
-        /// </summary>
-        /// <param name="enumType"></param>
-        /// <param name="label"></param>
-        /// <param name="ignoreCase"></param>
-        /// <returns></returns>
-        public int GetEnumValue(Type enumType, string label, bool ignoreCase)
-        {
-            var collection = EnumToDictionary(enumType);
-            foreach (int item in collection.Keys)
-            {
-                bool b = !ignoreCase ? (collection[item] == label) : (collection[item].ToLower() == label.ToLower());
-                if (b)
-                {
-                    return item;
-                }
-            }
-            return -1;
-        }
-
-
-        /// <summary>
-        /// 获取枚举属性集合
-        /// </summary>
-        /// <param name="enumType"></param>
-        /// <returns></returns>
-        public static List<EnumInfo> GetEnumInfoList(Type enumType)
-        {
-            List<EnumInfo> list = new List<EnumInfo>();
-            var descDic = EnumToDictionary(enumType, true);
-            var labelDic = EnumToDictionary(enumType);
-            foreach (var item in descDic)
-            {
-                EnumInfo info = new EnumInfo();
-                info.ID = item.Key.ToString();
-                info.Description = item.Value;
-                foreach (var label in labelDic)
-                {
-                    if (item.Key == label.Key)
-                    {
-                        info.Name = label.Value;
-                    }
-                }
-                list.Add(info);
-            }
-            return list;
-        }
-        /// <summary>
         /// 通过枚举的值和类型，获取其描述信息
         /// </summary>
         /// <param name="enumType"></param>
@@ -256,26 +133,6 @@ namespace DKD.Framework.Extensions
             return eDesc;
         }
 
-        /// <summary>
-        /// 通过枚举描述获取value
-        /// </summary>
-        /// <param name="enumType"></param>
-        /// <param name="description"></param>
-        /// <returns></returns>
-        public static object GetValueByDescription(Type enumType, string description)
-        {
-            var list = GetEnumInfoList(enumType);
-            object value = "";
-            foreach (var item in list)
-            {
-                if (item.Description == description)
-                {
-                    value = item.ID;
-                    break;
-                }
-            }
-            return value;
-        }
     }
 
     /// <summary>

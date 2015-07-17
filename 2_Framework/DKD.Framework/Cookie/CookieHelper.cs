@@ -11,33 +11,33 @@ namespace DKD.Framework.Cookie
         /// <summary>
         /// 写入cookie
         /// </summary>
-        /// <param name="Request">请求对象</param>
-        /// <param name="Response">输出对象</param>
+        /// <param name="request">请求对象</param>
+        /// <param name="response">输出对象</param>
         /// <param name="key">cookie键</param>
         /// <param name="value">cookie值</param>
         /// <param name="day">过期天数</param>
-        public static void WriteCookie(HttpRequest Request, HttpResponse Response, string key, string value,int day)
+        public static void WriteCookie(HttpRequest request, HttpResponse response, string key, string value,int day)
         {
-            HttpCookie cookiename = new HttpCookie(key);
+            var cookiename = new HttpCookie(key);
             cookiename.Name = key;
             cookiename.Value = value;
             cookiename.Expires = DateTime.Now.AddDays(day);
-            Response.Cookies.Add(cookiename);
+            response.Cookies.Add(cookiename);
         }
 
         /// <summary>
         /// 获取指定的cookie
         /// </summary>
-        /// <param name="Request">请求对象</param>
+        /// <param name="request">请求对象</param>
         /// <param name="key">cookie键</param>
         /// <returns></returns>
-        public static string GetCookie(HttpRequest Request,string key)
+        public static string GetCookie(HttpRequest request,string key)
         {
-            if (Request.Cookies[key] != null)
+            if (request.Cookies[key] != null)
             {
-                return Request.Cookies[key].Value;
+                return request.Cookies[key].Value;
             }
-            return "-1";
+            return string.Empty;
         }
     }
 }

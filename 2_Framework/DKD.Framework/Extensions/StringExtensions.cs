@@ -121,7 +121,7 @@ namespace DKD.Framework.Extensions
         }
 
         /// <summary>
-        /// 返回WEB程序真实的URL地址 如:http://www.WanHao.com 或 http://localhost:234/cms
+        /// 返回WEB程序真实的URL地址 如:http://www.baidu.com 或 http://localhost:234/cms
         /// </summary>
         public static string GetHostDomain()
         {
@@ -219,17 +219,16 @@ namespace DKD.Framework.Extensions
         /// </summary>
         /// <param name="str">被截取的字符串</param>
         /// <param name="subcount">需要截取的个数</param>
-        /// <param name="flag">是否加...</param>
+        /// <param name="suffix">后缀</param>
         /// <returns></returns>
-        public static string SubStringTrue(this string str, int subcount, bool flag)
+        public static string SubStringTrue(this string str, int subcount, string suffix="")
         {
             if (str == null)
                 return string.Empty;
             if (str.Length >= subcount)
             {
                 string temp = str.Substring(0, subcount);
-                if (flag)
-                    temp += "...";
+                temp += suffix;
 
                 return temp;
             }
@@ -243,9 +242,7 @@ namespace DKD.Framework.Extensions
         /// <returns></returns>
         public static string GetAppSetting(this string settingName)
         {
-            try
-            { return System.Configuration.ConfigurationManager.AppSettings[settingName]; }
-            catch { return ""; }
+            return System.Configuration.ConfigurationManager.AppSettings[settingName];
         }
 
         /// <summary>
@@ -326,17 +323,6 @@ namespace DKD.Framework.Extensions
         }
 
         /// <summary>
-        /// 当前值为null是则用value替换
-        /// </summary>
-        /// <param name="obj">当前值</param>
-        /// <param name="value">替换值</param>
-        /// <returns></returns>
-        public static object DefaultValue(this object obj, object value)
-        {
-            return obj == null ? value : obj;
-        }
-
-        /// <summary>
         /// 当前值为null或空时是则用value替换
         /// </summary>
         /// <param name="obj">当前值</param>
@@ -358,18 +344,20 @@ namespace DKD.Framework.Extensions
         }
 
         /// <summary>
-        /// 重重字符串
+        /// 重复字符串
         /// </summary>
         /// <param name="obj">要重复的字符串</param>
         /// <param name="repeatCount">重复多少次</param>
         /// <returns></returns>
         public static string StrRepeat(this string obj, int repeatCount)
         {
-            string temp = "";
 
+            var sb = new StringBuilder();
             for (int idx = 0; idx < repeatCount; idx++)
-                temp += obj;
-            return temp;
+            {
+                sb.Append(obj);
+            }
+            return sb.ToString();
         }
 
         /// <summary>
@@ -722,8 +710,6 @@ namespace DKD.Framework.Extensions
             {
                 return "未知区域";
             }
-
-            return "未知区域";
         }
 
         #endregion
@@ -740,8 +726,7 @@ namespace DKD.Framework.Extensions
             int result = defalut;
             if (int.TryParse(s, out result))
                 return result;
-            else
-                return defalut;
+            return defalut;
         }
 
         /// <summary>
@@ -755,8 +740,7 @@ namespace DKD.Framework.Extensions
             bool result = defalut;
             if (bool.TryParse(s, out result))
                 return result;
-            else
-                return defalut;
+            return defalut;
         }
 
         /// <summary>
@@ -770,8 +754,7 @@ namespace DKD.Framework.Extensions
             double result = defalut;
             if (double.TryParse(s, out result))
                 return result;
-            else
-                return defalut;
+            return defalut;
         }
 
         /// <summary>

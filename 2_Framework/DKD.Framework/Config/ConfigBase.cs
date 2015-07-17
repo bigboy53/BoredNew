@@ -2,7 +2,6 @@
 using System.Web;
 using System.IO;
 using System.Collections.Generic;
-using DKD.Framework.MD5;
 using Newtonsoft.Json;
 
 namespace DKD.Framework.Config
@@ -12,8 +11,7 @@ namespace DKD.Framework.Config
     /// </summary> 
     public abstract class ConfigBase
     {
-
-        public ConfigBase()
+        protected ConfigBase()
         { InitConfig(); }
 
         /// <summary>
@@ -23,7 +21,9 @@ namespace DKD.Framework.Config
 
         #region 局部变量
 
-        public readonly static string RootPath = HttpContext.Current == null ? (AppDomain.CurrentDomain.BaseDirectory) + @"Config\" : HttpContext.Current.Server.MapPath("~/Config/");
+        public static readonly string RootPath = HttpContext.Current == null
+            ? (AppDomain.CurrentDomain.BaseDirectory) + @"Config\"
+            : HttpContext.Current.Server.MapPath("~/Config/");
 
         /// <summary>
         /// 配置文件所在路径(相对，会应用程序的设目录上加上指定的路径)
@@ -33,7 +33,7 @@ namespace DKD.Framework.Config
         /// <summary>
         /// 缓存变量
         /// </summary>
-        private static Dictionary<string, ConfigBase> JsonCache = new Dictionary<string, ConfigBase>();
+        private static Dictionary<string, ConfigBase> _jsonCache = new Dictionary<string, ConfigBase>();
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace DKD.Framework.Config
         /// </summary>
         public void ClearCache()
         {
-            JsonCache.Clear();
+            _jsonCache.Clear();
         }
 
         /// <summary>
@@ -56,10 +56,10 @@ namespace DKD.Framework.Config
             File.WriteAllText(RootPath + SaveJsonPath, JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented), System.Text.Encoding.UTF8);
 
             //加入缓存
-            if (!JsonCache.ContainsKey(this.GetType().GUID.ToString()))
-                JsonCache.Add(this.GetType().GUID.ToString(), this);
+            if (!_jsonCache.ContainsKey(this.GetType().GUID.ToString()))
+                _jsonCache.Add(this.GetType().GUID.ToString(), this);
             else
-                JsonCache[this.GetType().GUID.ToString()] = this;
+                _jsonCache[this.GetType().GUID.ToString()] = this;
 
 
         }
@@ -77,14 +77,14 @@ namespace DKD.Framework.Config
                 T temp = JsonConvert.DeserializeObject<T>(File.ReadAllText(RootPath + SaveJsonPath, System.Text.Encoding.UTF8));
                 //T temp = JsonConvert.DeserializeObject<T>(File.ReadAllText(@"E:\Bored\Bored\Bored.UnitTest\Config\" + SaveJsonPath, System.Text.Encoding.UTF8));
                 //加入缓存
-                if (!JsonCache.ContainsKey(typeof(T).GUID.ToString()))
-                    JsonCache.Add(typeof(T).GUID.ToString(), temp);
+                if (!_jsonCache.ContainsKey(typeof(T).GUID.ToString()))
+                    _jsonCache.Add(typeof(T).GUID.ToString(), temp);
 
                 return temp;
             }
             catch
             {
-                return new T();
+                return default(T);
             }
 
         }
@@ -100,9 +100,9 @@ namespace DKD.Framework.Config
         /// <returns></returns>
         public static T Instance<T>() where T : ConfigBase, new()
         {
-            ///加入缓存
-            if (JsonCache.ContainsKey(typeof(T).GUID.ToString()))
-                return (T)JsonCache[typeof(T).GUID.ToString()];
+            //加入缓存
+            if (_jsonCache.ContainsKey(typeof(T).GUID.ToString()))
+                return (T)_jsonCache[typeof(T).GUID.ToString()];
 
             return new T().RevertJson<T>();
         }
@@ -115,14 +115,11 @@ namespace DKD.Framework.Config
         public static bool RemoveInstance<T>() where T : ConfigBase, new()
         {
             string typeGuid = typeof(T).GUID.ToString();
-            if (JsonCache.ContainsKey(typeGuid))
+            if (_jsonCache.ContainsKey(typeGuid))
             {
-                return JsonCache.Remove(typeGuid);
+                return _jsonCache.Remove(typeGuid);
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
 
@@ -135,7 +132,7 @@ namespace DKD.Framework.Config
         /// </summary>
         public static void ClearJsonCache()
         {
-            JsonCache = new Dictionary<string, ConfigBase>();
+            _jsonCache = new Dictionary<string, ConfigBase>();
         }
 
         #endregion
@@ -147,9 +144,7 @@ namespace DKD.Framework.Config
         /// </summary>
         public static void StartConfigWatcher()
         {
-
-            FileSystemWatcher filewatcher = new FileSystemWatcher();
-
+            var filewatcher = new FileSystemWatcher();
             filewatcher.Filter = "*.*"; //设定监听的文件类型
             filewatcher.Path = RootPath; //设定监听的目录
             filewatcher.Changed += new FileSystemEventHandler(filewatcher_Changed);
@@ -161,11 +156,11 @@ namespace DKD.Framework.Config
         {
             try
             {
-                ///清除配置缓存
+                //清除配置缓存
                 ClearJsonCache();
 
                 //清除数据库链接字符串
-                Database.DbHelper.DbHelperSQL.ConnectionString = FrameworkConfig.Instance<FrameworkConfig>().ConnectionString.Decrypt();
+                //Database.DbHelper.DbHelperSQL.ConnectionString = ConfigBase.Instance<FrameworkConfig>().ConnectionString.Decrypt();
             }
             catch { }
         }

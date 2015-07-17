@@ -137,16 +137,21 @@
     <Compile Include="Content\js\UEditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="Content\js\UEditor\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\js\UEditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Core\GridTable\GridTable.cs" />
+    <Compile Include="Core\GridTable\Model\Column.cs" />
+    <Compile Include="Core\GridTable\Model\EditColumn.cs" />
+    <Compile Include="Core\HtmlHelper\Enum\HtmlEnum.cs" />
+    <Compile Include="Core\HtmlHelper\Helper\ToHtmlStringHelper.cs" />
+    <Compile Include="Core\HtmlHelper\Model\Custom.cs" />
+    <Compile Include="Core\HtmlHelper\Model\SelectItem.cs" />
     <Compile Include="Handler\UpLoadHandler.ashx.cs">
       <DependentUpon>UpLoadHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Helper\CommonHelper.cs" />
-    <Compile Include="Helper\GridTable.cs" />
-    <Compile Include="Helper\HtmlStringHelper.cs" />
+    <Compile Include="Core\HtmlHelper\HtmlStringHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\PermissionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

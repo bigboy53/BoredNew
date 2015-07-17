@@ -20,7 +20,7 @@ namespace DKD.Framework.Extensions
         public static List<TResult> ToList<TResult>(this DataTable dt) where TResult : class, new()
         {
             //创建一个属性的列表
-            List<PropertyInfo> prlist = new List<PropertyInfo>();
+            var prlist = new List<PropertyInfo>();
 
             //获取TResult的类型实例  反射的入口
             Type t = typeof(TResult);

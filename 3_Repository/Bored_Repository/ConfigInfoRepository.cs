@@ -38,12 +38,12 @@ namespace Bored.Repository
 
         public List<ConfigInfoDto> GetAllList()
         {
-            var data = CacheManager.Cache.Get(CacheKey.Config);
+            var data = CacheManager.Cache.Get(GlobalCacheKey.Config);
             if (data == null)
             {
                 var list = base.GetList();
                 var result = Mapper.Map<List<ConfigInfoDto>>(list);
-                CacheManager.Cache.Set(CacheKey.Config, result);
+                CacheManager.Cache.Set(GlobalCacheKey.Config, result);
                 return result;
             }
             return (List<ConfigInfoDto>)data;

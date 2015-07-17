@@ -42,7 +42,7 @@ namespace Bored.Repository
                         db.SaveChanges();
                         transaction.Complete();
                     }
-                    CacheManager.Cache.Remove(CacheKey.RolePermission.ToFormat(model.ID));
+                    CacheManager.Cache.Remove(GlobalCacheKey.RolePermission.ToFormat(model.ID));
                     return true;
                 }
             }
@@ -79,7 +79,7 @@ namespace Bored.Repository
 
         public List<RolePermissionDto> GetPermissionList(int rid)
         {
-            var list = CacheManager.Cache.Get(CacheKey.RolePermission.ToFormat(rid));
+            var list = CacheManager.Cache.Get(GlobalCacheKey.RolePermission.ToFormat(rid));
             if (list != null)
                 return (List<RolePermissionDto>)list;
             List<RolePermission> data;
@@ -88,7 +88,7 @@ namespace Bored.Repository
                 data = db.RolePermission.Where(t => t.RID == rid).ToList();
             }
             var dataList = Mapper.Map<List<RolePermissionDto>>(data);
-            CacheManager.Cache.Set(CacheKey.RolePermission.ToFormat(rid), dataList);
+            CacheManager.Cache.Set(GlobalCacheKey.RolePermission.ToFormat(rid), dataList);
             return dataList;
         }
     }

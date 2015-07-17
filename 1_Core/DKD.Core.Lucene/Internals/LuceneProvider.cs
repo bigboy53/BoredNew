@@ -100,11 +100,14 @@ namespace DKD.Core.Lucene
                     dataCount = pageSize * 1000;
                 else
                     dataCount = docs.totalHits;
-                int i = (pageIndex - 1) * pageSize;
-                while (i < dataCount && result.Count < pageSize)
+                int currentCount = (pageIndex - 1) * pageSize;
+
+
+
+                while (currentCount < dataCount && result.Count < pageSize)
                 {
                     var model = new LuceneModel();
-                    Document doc = searcher.Doc(docs.scoreDocs[i].doc);
+                    Document doc = searcher.Doc(docs.scoreDocs[currentCount].doc);
 
                     model.Content = doc.Get("content");
                     model.HightLightContent = SplitContent.HightLight(ky, doc.Get("content"));
@@ -145,14 +148,13 @@ namespace DKD.Core.Lucene
                     //}
                     #endregion
 
-                    i++;
+                    currentCount++;
 
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                LoggerHelper.Logger("Lucene中GetList()错误", ex);
                 throw new LuceneException.LuceneException("Lucene中GetList()错误",ex);
             }
         }

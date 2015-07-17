@@ -9,9 +9,12 @@ using System.Web;
 
 namespace DKD.Framework.Files
 {
+    /// <summary>
+    /// 需要修改（报错信息要抛出去）
+    /// </summary>
     public class FileManager
     {
-        private static string strRootFolder;  //定义操作的根目录
+        private static string _strRootFolder;  //定义操作的根目录
 
         /// <summary>
         /// 文件是否存在
@@ -52,7 +55,7 @@ namespace DKD.Framework.Files
         /// <returns></returns>
         public static string GetRootPath()
         {
-            return strRootFolder;
+            return _strRootFolder;
         }
 
         /// <summary>
@@ -61,7 +64,7 @@ namespace DKD.Framework.Files
         /// <param name="path"></param>
         public static void SetRootPath(string path)
         {
-            strRootFolder = path;
+            _strRootFolder = path;
         }
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace DKD.Framework.Files
         /// <returns></returns>
         public static List<FileModel> GetItems()
         {
-            return GetItems(strRootFolder);
+            return GetItems(_strRootFolder);
         }
 
         /// <summary>
@@ -111,7 +114,7 @@ namespace DKD.Framework.Files
                 list.Add(item);
             }
 
-            if (path.Replace("\\", "").Replace("/", "").Length != strRootFolder.Replace("\\", "").Replace("/", "").Length + 36)
+            if (path.Replace("\\", "").Replace("/", "").Length != _strRootFolder.Replace("\\", "").Replace("/", "").Length + 36)
             {
                 FileModel topitem = new FileModel();
                 DirectoryInfo topdi = new DirectoryInfo(path).Parent;
@@ -120,7 +123,7 @@ namespace DKD.Framework.Files
                 list.Insert(0, topitem);
 
                 FileModel rootitem = new FileModel();
-                DirectoryInfo rootdi = new DirectoryInfo(strRootFolder);
+                DirectoryInfo rootdi = new DirectoryInfo(_strRootFolder);
                 rootitem.Name = "[根目录]";
                 rootitem.FullName = rootdi.FullName;
                 list.Insert(0, rootitem);

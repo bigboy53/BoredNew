@@ -5,6 +5,7 @@ using AutoMapper;
 
 namespace DKD.Framework.Extensions
 {
+    [Obsolete]
     public static class MapperExtention
     {
         /// <summary>

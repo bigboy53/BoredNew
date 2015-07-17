@@ -2,27 +2,31 @@
 using System.Linq;
 using Autofac;
 using Bored.IService;
+using Bored.Manager.Core;
+using DKD.Framework.Const;
 using DKD.Framework.Contract.Enum;
 using DKD.Framework.Extensions;
 using DKD.Framework.Filter;
 using Manage.ViewModel;
-using CacheKey = DKD.Framework.Const.CacheKey;
 
 namespace Bored.Manager.Helper
 {
     public class CommonHelper
     {
-        #region 属性
-        private static IRolesService RolesBll
-        {
-            get { return RegisterAutofacFroSingle.CurrentContainer.Resolve<IRolesService>(); }
-        }
-        private static IConfigInfoService ConfigInfoBll
-        {
-            get { return RegisterAutofacFroSingle.CurrentContainer.Resolve<IConfigInfoService>(); }
-        }
+        #region 私有字段
+
+        private static readonly IRolesService RolesBll;
+        private static readonly IConfigInfoService ConfigInfoBll;
+
         #endregion
 
+        static CommonHelper()
+        {
+            RolesBll = RegisterAutofacFroSingle.CurrentContainer.Resolve<IRolesService>();
+            ConfigInfoBll = RegisterAutofacFroSingle.CurrentContainer.Resolve<IConfigInfoService>();
+        }
+
+        #region 角色 权限
         /// <summary>
         /// 获取所有角色列表
         /// </summary>
@@ -51,14 +55,15 @@ namespace Bored.Manager.Helper
         /// <returns></returns>
         public static Dictionary<string, List<ActionInfoAttribute>> GetPermissionList()
         {
-            var list = DKD.Core.Cache.CacheManager.Cache.Get(CacheKey.PermissionList);
+            var list = DKD.Core.Cache.CacheManager.Cache.Get(GlobalCacheKey.PermissionList);
             if (list != null)
-                return (Dictionary<string, List<ActionInfoAttribute>>) list;
+                return (Dictionary<string, List<ActionInfoAttribute>>)list;
             var data = ActionFactory.GetAllAction();
-            DKD.Core.Cache.CacheManager.Cache.Set(CacheKey.PermissionList, data);
+            DKD.Core.Cache.CacheManager.Cache.Set(GlobalCacheKey.PermissionList, data);
             return data;
         }
-
+        #endregion
+       
         public static List<SelectItem> GetConfigList()
         {
             var data = EnumHelper.GetEnumInfoList(typeof(ConfigTypeEnum.ConfigType));

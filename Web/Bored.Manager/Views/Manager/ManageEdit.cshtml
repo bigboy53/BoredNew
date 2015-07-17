@@ -1,5 +1,6 @@
 ﻿@using Bored.Manager.Helper
 @using PageHelper
+@using Bored.Manager.Core
 @{
     var pageModel = PageStruct.InitEdit("manager_edit", Url.Action("Mange_Add", "Manager"), Url.Action("Mange_Edit", "Manager"), Url.Action("Manage_Model", "Manager"));
     var id = pageModel.GetModifyId("id");

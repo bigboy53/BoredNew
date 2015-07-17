@@ -36,8 +36,14 @@ namespace DKD.Core.Upload
         public UploadResult Result { get; private set; }
         public abstract string RootPath { get; }
 
+        /// <summary>
+        /// 返回的结果
+        /// </summary>
         public abstract string GetResult(string localFileName, string uploadFilePath, string err);
 
+        /// <summary>
+        /// 上传完成后执行的操作
+        /// </summary>
         public abstract void OnUploaded(HttpContext context, string filePath);
 
 
@@ -103,15 +109,4 @@ namespace DKD.Core.Upload
             context.Response.End();
         }
     }
-
-    public enum UploadState
-    {
-        Success = 0,
-        SizeLimitExceed = -1,
-        TypeNotAllow = -2,
-        FileAccessError = -3,
-        NetworkError = -4,
-        Unknown = 1,
-    }
-
 }

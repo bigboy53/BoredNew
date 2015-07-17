@@ -31,7 +31,7 @@ namespace DKD.Framework.MD5
         /// <returns></returns>
         public static string Decrypt(this string text, string sKey)
         {
-            DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
+            var provider = new DESCryptoServiceProvider();
             int num = text.Length / 2;
             byte[] buffer = new byte[num];
             try

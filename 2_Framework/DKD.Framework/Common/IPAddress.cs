@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 namespace DKD.Framework.Common
 {
     /// <summary>
-    /// IP到地区查询
+    /// IP到地区查询(需要优化)
     /// </summary>
     public class IPAddress
     {
@@ -95,8 +95,8 @@ namespace DKD.Framework.Common
 
         private int QQwry()
         {
-            string pattern = @"(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))";
-            Regex objRe = new Regex(pattern);
+            const string pattern = @"(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))";
+            var objRe = new Regex(pattern);
             Match objMa = objRe.Match(ip);
             if (!objMa.Success)
             {
@@ -118,16 +118,17 @@ namespace DKD.Framework.Common
                 this.local = "";
                 nRet = 1;
             }
-            objfs = new FileStream(this.dataPath, FileMode.Open, FileAccess.Read);
+            
             try
             {
+                objfs = new FileStream(this.dataPath, FileMode.Open, FileAccess.Read);
                 //objfs.Seek(0,SeekOrigin.Begin);
                 objfs.Position = 0;
                 byte[] buff = new Byte[8];
                 objfs.Read(buff, 0, 8);
-                firstStartIp = buff[0] + buff[1] * 256 + buff[2] * 256 * 256 + buff[3] * 256 * 256 * 256;
-                lastStartIp = buff[4] * 1 + buff[5] * 256 + buff[6] * 256 * 256 + buff[7] * 256 * 256 * 256;
-                long recordCount = Convert.ToInt64((lastStartIp - firstStartIp) / 7.0);
+                firstStartIp = buff[0] + buff[1]*256 + buff[2]*256*256 + buff[3]*256*256*256;
+                lastStartIp = buff[4]*1 + buff[5]*256 + buff[6]*256*256 + buff[7]*256*256*256;
+                long recordCount = Convert.ToInt64((lastStartIp - firstStartIp)/7.0);
                 if (recordCount <= 1)
                 {
                     country = "FileDataError";
@@ -139,7 +140,7 @@ namespace DKD.Framework.Common
                 long recNO = 0;
                 while (rangB < rangE - 1)
                 {
-                    recNO = (rangE + rangB) / 2;
+                    recNO = (rangE + rangB)/2;
                     this.GetStartIp(recNO);
                     if (ip_Int == this.startIp)
                     {
@@ -170,6 +171,11 @@ namespace DKD.Framework.Common
             catch
             {
                 return 1;
+            }
+            finally
+            {
+                objfs.Close();
+                objfs.Dispose();
             }
 
         }

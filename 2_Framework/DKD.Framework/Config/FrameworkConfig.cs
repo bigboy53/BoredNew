@@ -174,13 +174,6 @@ namespace DKD.Framework.Config
 
         #endregion
 
-        /// <summary>
-        /// 初始化程序远行记录器
-        /// </summary>
-        public static void InitLogger()
-        {
-            log4net.Config.XmlConfigurator.Configure();
-        }
 
         public override void InitConfig()
         {

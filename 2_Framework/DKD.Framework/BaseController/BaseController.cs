@@ -21,32 +21,32 @@ namespace DKD.Framework
         /// <summary>
         /// 管理View路径
         /// </summary>
-        private string MANAGEVIEWPATH = "";
+        private string MANAGEVIEWPATH = string.Empty;
 
         /// <summary>
         /// 对话框View路径
         /// </summary>
-        private string DIALOGVIEWPATH = "";
+        private string DIALOGVIEWPATH = string.Empty;
 
         /// <summary>
         /// 普通View路径
         /// </summary>
-        private string NORMALVIEWPATH = "";
+        private string NORMALVIEWPATH = string.Empty;
 
         /// <summary>
         /// 前台会员View
         /// </summary>
-        private string MEMBERVIEWPATH = "";
+        private string MEMBERVIEWPATH = string.Empty;
 
         /// <summary>
         /// 控件View路径
         /// </summary>
-        private string CONTROLPATH = "";
+        private string CONTROLPATH = string.Empty;
 
         /// <summary>
         /// 主题路径
         /// </summary>
-        private string CURRENTABSOLUTTHEMPATH = "";
+        private string CURRENTABSOLUTTHEMPATH = string.Empty;
 
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace DKD.Framework
         {
             //base.ValidateRequest = false;
 
-            CACHEOBJECT = FrameworkConfig.Instance<FrameworkConfig>();
+            CACHEOBJECT = ConfigBase.Instance<FrameworkConfig>();
             CURRENTABSOLUTTHEMPATH = CACHEOBJECT.ThemesPath + "/" + CACHEOBJECT.CurrentTheme + "/";
 
             MANAGEVIEWPATH = CURRENTABSOLUTTHEMPATH + CACHEOBJECT.ManageViewPath;
@@ -383,11 +383,4 @@ namespace DKD.Framework
 
         #endregion
     }
-
-    public class JsonDto
-    {
-        public bool Result { get; set; }
-        public string Error { get; set; }
-    }
-
 }

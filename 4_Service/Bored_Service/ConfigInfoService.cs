@@ -29,7 +29,7 @@ namespace Bored.Service
             entity.CreateTime = DateTime.Now;
             var result = _configInfoDal.Insert(entity);
             if(result>0)
-                CacheManager.Cache.Remove(CacheKey.Config);
+                CacheManager.Cache.Remove(GlobalCacheKey.Config);
             return result;
         }
 
@@ -60,7 +60,7 @@ namespace Bored.Service
             model.IsDel = oldModel.IsDel;
             var result = _configInfoDal.Update(Mapper.Map<ConfigInfo>(model));
             if(result)
-                CacheManager.Cache.Remove(CacheKey.Config);
+                CacheManager.Cache.Remove(GlobalCacheKey.Config);
             return result;
         }
 
@@ -69,7 +69,7 @@ namespace Bored.Service
             var idList = id.Split(',');
             var result= _configInfoDal.Update(t => idList.Contains(t.ID.ToString()), t => new ConfigInfo { IsDel = true });
             if(result)
-                CacheManager.Cache.Remove(CacheKey.Config);
+                CacheManager.Cache.Remove(GlobalCacheKey.Config);
             return result;
         }
 

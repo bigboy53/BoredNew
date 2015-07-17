@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Web;
-using PageHelper;
 
-namespace Bored.Manager.View.Helper
+namespace Bored.Manager.Core
 {
     public class GridTable:IHtmlString
     {
 
         #region 字段
-        private string _tableName;
-        private List<Column> _columnList = new List<Column>();
-        private bool _isSelectAllBtn = false;
+        private readonly string _tableName;
+        private readonly List<Column> _columnList = new List<Column>();
+        private bool _isSelectAllBtn;
         private string _selectId;
-        private string _url;
-        private EditColumn _editColumn = null; //编辑列
-        private EditColumn _deleteColumn = null;
-        private PageStruct _pageModel = null;
+        private readonly string _url;
+        private EditColumn _editColumn; //编辑列
+        private EditColumn _deleteColumn;
+        //private PageStruct _pageModel = null;
         #endregion
 
         public GridTable(string tableName,string url)
@@ -181,59 +180,5 @@ namespace Bored.Manager.View.Helper
         {
             return ToHtmlString();
         }
-    }
-
-    /// <summary>
-    /// 列
-    /// </summary>
-    public class Column
-    {
-        /// <summary>
-        /// 宽度
-        /// </summary>
-        public int Width { get; set; }
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string Title { get; set; }
-        /// <summary>
-        /// 格式化
-        /// </summary>
-        public string Formatter { get; set; }
-        /// <summary>
-        /// 字段名
-        /// </summary>
-        public string Field { get; set; }
-        /// <summary>
-        /// 截取长度
-        /// </summary>
-        public int SubText { get; set; }
-    }
-
-    /// <summary>
-    /// 修改列
-    /// </summary>
-    class EditColumn
-    {
-        /// <summary>
-        /// 字段
-        /// </summary>
-        public string Field { get; set; }
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string Title { get; set; }
-        /// <summary>
-        /// 宽
-        /// </summary>
-        public int Width { get; set; }
-        /// <summary>
-        /// 操作地址
-        /// </summary>
-        public string Url { get; set; }
-        /// <summary>
-        /// 格式化
-        /// </summary>
-        public string Formatter { get; set; }
     }
 }
