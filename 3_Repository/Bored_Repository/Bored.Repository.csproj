@@ -88,6 +88,10 @@
       <Project>{0745099a-865a-4957-b42a-9db0767c6bd7}</Project>
       <Name>DKD.Framework.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Utility\DKD.Framework.Utility.csproj">
+      <Project>{61a1117f-db90-411d-a03f-4978bcde0990}</Project>
+      <Name>DKD.Framework.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\2_Framework\DKD.Framework\DKD.Framework.csproj">
       <Project>{45b1e818-a225-4de6-a611-60d694fa5fd4}</Project>
       <Name>DKD.Framework</Name>

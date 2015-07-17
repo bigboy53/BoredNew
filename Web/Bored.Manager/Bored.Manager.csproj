@@ -1474,7 +1474,7 @@
     <Content Include="Content\js\UEditor\ueditor.parse.min.js" />
     <Content Include="Content\js\zice.custom.js" />
     <Content Include="Global.asax" />
-    <Content Include="Config\Framework.config" />
+    <Content Include="Config\Framework.xml" />
     <Content Include="Content\components\elfinder\connectors\php\connector-fileimport.php" />
     <Content Include="Content\components\elfinder\connectors\php\connector-icon.php" />
     <Content Include="Content\components\elfinder\connectors\php\elFinder.class.php" />
@@ -1612,6 +1612,10 @@
     <ProjectReference Include="..\..\2_Framework\DKD.Framework.DAL\DKD.Framework.Data.csproj">
       <Project>{7d7296e2-8e39-451a-92c0-448abb73166c}</Project>
       <Name>DKD.Framework.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Utility\DKD.Framework.Utility.csproj">
+      <Project>{61a1117f-db90-411d-a03f-4978bcde0990}</Project>
+      <Name>DKD.Framework.Utility</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\2_Framework\DKD.Framework\DKD.Framework.csproj">
       <Project>{45b1e818-a225-4de6-a611-60d694fa5fd4}</Project>

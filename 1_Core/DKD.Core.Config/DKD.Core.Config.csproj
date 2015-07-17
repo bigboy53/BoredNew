@@ -40,23 +40,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfgException\SysConfgException.cs" />
-    <Compile Include="Helper\Helper.cs" />
-    <Compile Include="Helper\JsonHelper.cs" />
-    <Compile Include="Helper\SitePathHelper.cs" />
-    <Compile Include="Helper\XmlUtil.cs" />
-    <Compile Include="Model\SysConfigModel.cs" />
+    <Compile Include="CachedConfigContext.cs" />
+    <Compile Include="Internals\ConfigContext.cs" />
+    <Compile Include="Internals\ConfigFileBase.cs" />
+    <Compile Include="Internals\ConfigNodeBase.cs" />
+    <Compile Include="Internals\FileConfigService.cs" />
+    <Compile Include="Internals\IConfigService.cs" />
+    <Compile Include="Models\FrameworkConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SysConfigManager.cs" />
-    <Compile Include="Xml\SystemConfigurationHelper.cs" />
-    <Compile Include="Xml\XmlUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Contract\DKD.Framework.Contract.csproj">
+      <Project>{0745099a-865a-4957-b42a-9db0767c6bd7}</Project>
+      <Name>DKD.Framework.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Utility\DKD.Framework.Utility.csproj">
+      <Project>{61a1117f-db90-411d-a03f-4978bcde0990}</Project>
+      <Name>DKD.Framework.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DKD.Core.Cache\DKD.Core.Cache.csproj">
       <Project>{fb36a890-786b-490e-aeab-060c12f1160b}</Project>
       <Name>DKD.Core.Cache</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

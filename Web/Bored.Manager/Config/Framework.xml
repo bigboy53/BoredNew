@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Framework  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsSessionAuthor>false</IsSessionAuthor>
+  <ManageAuthorKey>669940210D2AEF035F590B9D956D2CEC</ManageAuthorKey>
+  <MemberAuthorKey>222F701DD30519BDA6D2A4490E1F424C</MemberAuthorKey>
+  <IPDatabasePath>~/bin/ipdatabase.config</IPDatabasePath>
+  <ControllerRefs>~/bin/Bored.Manager.Controllers.dll</ControllerRefs>
+  <SmsUser>null</SmsUser>
+  <SmsPassword>null</SmsPassword>
+  <EmailHost>654858548@qq.com</EmailHost>
+  <EmailUser>654858548@qq.com</EmailUser>
+  <EmailPassword>13558761283di</EmailPassword>
+  <EmailPort>25</EmailPort>
+  <MasterEmail>654858548@qq.com</MasterEmail>
+  <ManageViewPath>Manager</ManageViewPath>
+  <DialogViewPath>Dialog</DialogViewPath>
+  <NormalViewPath>Normal</NormalViewPath>
+  <MemberViewPath>Member</MemberViewPath>
+  <ThemesPath>~/Themes</ThemesPath>
+  <CurrentTheme>Default</CurrentTheme>
+  <ControlPath>Controls</ControlPath>
+  <CookiesTimer>10</CookiesTimer>
+</Framework>

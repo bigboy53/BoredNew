@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using Bored.Model;
 using Bored.IService;
 using DKD.Framework;
-using DKD.Framework.Common;
 using Manage.ViewModel;
 
 namespace Bored.Manager.Controllers

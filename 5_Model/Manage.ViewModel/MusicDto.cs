@@ -1,6 +1,3 @@
-using DKD.Framework.Contract.Enum;
-using DKD.Framework.Extensions;
-
 namespace  Manage.ViewModel
 {
     public class MusicDto

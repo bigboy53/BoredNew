@@ -5,8 +5,8 @@ using Bored.IService;
 using Bored.Manager.Core;
 using DKD.Framework.Const;
 using DKD.Framework.Contract.Enum;
-using DKD.Framework.Extensions;
 using DKD.Framework.Filter;
+using DKD.Framework.Utility;
 using Manage.ViewModel;
 
 namespace Bored.Manager.Helper

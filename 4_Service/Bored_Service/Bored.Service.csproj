@@ -56,6 +56,10 @@
     <Compile Include="VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Utility\DKD.Framework.Utility.csproj">
+      <Project>{61a1117f-db90-411d-a03f-4978bcde0990}</Project>
+      <Name>DKD.Framework.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\3_Repository\Bored_Repository\Bored.Repository.csproj">
       <Project>{20ec89fc-4252-42a0-935b-8a893c9e72f4}</Project>
       <Name>Bored.Repository</Name>

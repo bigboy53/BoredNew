@@ -5,9 +5,9 @@ using Bored.Manager.Filter;
 using Bored.IService;
 using DKD.Core.Lucene;
 using DKD.Framework;
-using DKD.Framework.Common;
 using DKD.Framework.Const;
 using DKD.Framework.Filter;
+using DKD.Framework.Utility.VerifyCode;
 using Manage.ViewModel;
 
 namespace Bored.Manager.Controllers

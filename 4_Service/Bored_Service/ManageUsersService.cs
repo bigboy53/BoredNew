@@ -5,7 +5,7 @@ using AutoMapper;
 using Bored.Model;
 using Bored.IService;
 using Bored.IRepository;
-using DKD.Framework.MD5;
+using DKD.Framework.Utility.MD5;
 using Manage.ViewModel;
 using PageHelper;
 

@@ -10,8 +10,8 @@ using Bored.IRepository;
 using DKD.Core.Cache;
 using DKD.Framework.Const;
 using DKD.Framework.Data;
-using DKD.Framework.Extensions;
 using DKD.Framework.Logger;
+using DKD.Framework.Utility;
 using Manage.ViewModel;
 
 namespace Bored.Repository
@@ -48,7 +48,7 @@ namespace Bored.Repository
             }
             catch (Exception e)
             {
-                LoggerHelper.Logger("修改角色", e);
+                //LoggerHelper.Logger("修改角色", e);
                 return false;
             }
         }

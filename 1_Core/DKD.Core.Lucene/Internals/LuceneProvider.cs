@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using DKD.Framework.Extensions;
-using DKD.Framework.Logger;
+using DKD.Framework.Utility;
 using Lucene.Net.Analysis.PanGu;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
