@@ -51,7 +51,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />
@@ -63,8 +63,6 @@
     <Compile Include="Const\CommonConst.cs" />
     <Compile Include="Const\PermissionConst.cs" />
     <Compile Include="BaseController\BaseController.cs" />
-    <Compile Include="Config\ConfigBase.cs" />
-    <Compile Include="Config\FrameworkConfig.cs" />
     <Compile Include="Database\Attribute\AttributeHelper.cs" />
     <Compile Include="Database\Attribute\ColumnAttribute.cs" />
     <Compile Include="Database\Attribute\TableAttribute.cs" />
@@ -93,6 +91,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Config\DKD.Core.Config.csproj">
+      <Project>{c62ca3b8-b775-4ef3-a09e-764773a19f87}</Project>
+      <Name>DKD.Core.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\1_Core\DKD.Core.Logger\DKD.Core.Logger.csproj">
       <Project>{cf0ebb91-24b4-479c-af96-51043ef857cd}</Project>
       <Name>DKD.Core.Logger</Name>

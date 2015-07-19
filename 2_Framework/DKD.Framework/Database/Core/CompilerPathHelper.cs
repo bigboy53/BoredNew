@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DKD.Core.Config;
 
 namespace DKD.Framework.Database.Core.Helper
 {
@@ -14,7 +15,7 @@ namespace DKD.Framework.Database.Core.Helper
         /// <returns></returns>
         public static string GetCompilerDataAccessPath<EntityObject>()
         {
-            return GetBinFolderPath() + @"\" + Config.FrameworkConfig.Instance<Config.FrameworkConfig>().DllName + "." + typeof(EntityObject).Name.Trim() + ".dll";
+            return GetBinFolderPath() + @"\" + CachedConfigContext.Current.FrameworkConfig.DllName + "." + typeof(EntityObject).Name.Trim() + ".dll";
         }
 
         /// <summary>

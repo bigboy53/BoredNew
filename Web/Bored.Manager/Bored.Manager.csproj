@@ -63,9 +63,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Lucene.Net, Version=2.9.2.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\Lucene.Net.dll</HintPath>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\..\Lib\Lucene\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -73,24 +72,23 @@
       <HintPath>..\..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PanGu">
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.dll</HintPath>
+      <HintPath>..\..\Lib\Lucene\PanGu.dll</HintPath>
     </Reference>
-    <Reference Include="PanGu.HighLight, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.HighLight.dll</HintPath>
+    <Reference Include="PanGu.HighLight">
+      <HintPath>..\..\Lib\Lucene\PanGu.HighLight.dll</HintPath>
     </Reference>
-    <Reference Include="PanGu.Lucene.Analyzer, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.Lucene.Analyzer.dll</HintPath>
+    <Reference Include="PanGu.Lucene.Analyzer">
+      <HintPath>..\..\Lib\Lucene\PanGu.Lucene.Analyzer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Routing" />
@@ -155,6 +153,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\DataBaseConnection.xml" />
+    <Content Include="Config\Log4net.xml" />
     <Content Include="Config\log4netConfig.xml" />
     <Content Include="Content\components\checkboxes\customInput.jquery.js" />
     <Content Include="Content\components\checkboxes\iphone.check.js" />
@@ -1474,7 +1474,7 @@
     <Content Include="Content\js\UEditor\ueditor.parse.min.js" />
     <Content Include="Content\js\zice.custom.js" />
     <Content Include="Global.asax" />
-    <Content Include="Config\Framework.xml" />
+    <Content Include="Config\FrameworkConfig.xml" />
     <Content Include="Content\components\elfinder\connectors\php\connector-fileimport.php" />
     <Content Include="Content\components\elfinder\connectors\php\connector-icon.php" />
     <Content Include="Content\components\elfinder\connectors\php\elFinder.class.php" />
@@ -1592,6 +1592,10 @@
     <ProjectReference Include="..\..\1_Core\DKD.Core.Cache\DKD.Core.Cache.csproj">
       <Project>{fb36a890-786b-490e-aeab-060c12f1160b}</Project>
       <Name>DKD.Core.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Config\DKD.Core.Config.csproj">
+      <Project>{c62ca3b8-b775-4ef3-a09e-764773a19f87}</Project>
+      <Name>DKD.Core.Config</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\1_Core\DKD.Core.Logger\DKD.Core.Logger.csproj">
       <Project>{cf0ebb91-24b4-479c-af96-51043ef857cd}</Project>

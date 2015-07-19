@@ -56,6 +56,10 @@
     <Compile Include="VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Upload\DKD.Core.Upload.csproj">
+      <Project>{9ff3efd8-c8db-4476-8e34-ea2d788ce5f8}</Project>
+      <Name>DKD.Core.Upload</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\2_Framework\DKD.Framework.Utility\DKD.Framework.Utility.csproj">
       <Project>{61a1117f-db90-411d-a03f-4978bcde0990}</Project>
       <Name>DKD.Framework.Utility</Name>

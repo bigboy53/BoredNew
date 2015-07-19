@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Bored.Model;
+using DKD.Core.Config;
 using DKD.Framework.Data.Configuration;
 using DKD.Framework.Data.Infrastructure;
 
@@ -9,7 +10,7 @@ namespace DKD.Framework.Data
     public class BoredEntities : DbContextBase
     {
         public BoredEntities()
-            : base("name=Entities")
+            : base(CachedConfigContext.Current.DataBaseConnection.Bored)
         {
 
         }

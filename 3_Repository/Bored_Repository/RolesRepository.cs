@@ -10,7 +10,6 @@ using Bored.IRepository;
 using DKD.Core.Cache;
 using DKD.Framework.Const;
 using DKD.Framework.Data;
-using DKD.Framework.Logger;
 using DKD.Framework.Utility;
 using Manage.ViewModel;
 
@@ -20,36 +19,28 @@ namespace Bored.Repository
     {
         public bool Update(RolesDto model)
         {
-            try
+            model.RolePermission.ForEach(t =>
             {
-                model.RolePermission.ForEach(t =>
+                t.RID = model.ID;
+                t.CreateTime = DateTime.Now;
+            });
+            using (var db = new BoredEntities())
+            {
+                using (var transaction = new TransactionScope())
                 {
-                    t.RID = model.ID;
-                    t.CreateTime = DateTime.Now;
-                });
-                using (var db = new BoredEntities())
-                {
-                    using (var transaction = new TransactionScope())
-                    {
-                        db.Entry(Mapper.Map<Roles>(model)).State = EntityState.Modified;
-                        //this.DataContext.RolePermission.ExecuteStoreCommand("");
-                        object[] para =
+                    db.Entry(Mapper.Map<Roles>(model)).State = EntityState.Modified;
+                    //this.DataContext.RolePermission.ExecuteStoreCommand("");
+                    object[] para =
                         {
                             new SqlParameter("@RID", model.ID)
                         };
-                        db.Database.ExecuteSqlCommand("DELETE dbo.RolePermission WHERE RID=@RID", para);
-                        db.RolePermission.AddRange(Mapper.Map<List<RolePermission>>(model.RolePermission));
-                        db.SaveChanges();
-                        transaction.Complete();
-                    }
-                    CacheManager.Cache.Remove(GlobalCacheKey.RolePermission.ToFormat(model.ID));
-                    return true;
+                    db.Database.ExecuteSqlCommand("DELETE dbo.RolePermission WHERE RID=@RID", para);
+                    db.RolePermission.AddRange(Mapper.Map<List<RolePermission>>(model.RolePermission));
+                    db.SaveChanges();
+                    transaction.Complete();
                 }
-            }
-            catch (Exception e)
-            {
-                //LoggerHelper.Logger("修改角色", e);
-                return false;
+                CacheManager.Cache.Remove(GlobalCacheKey.RolePermission.ToFormat(model.ID));
+                return true;
             }
         }
 

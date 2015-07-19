@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using AutoMapper;
 using Bored.IService;
 using Bored.IRepository;
-using DKD.Framework.Common;
-using DKD.Framework.Data.Infrastructure;
 using Manage.ViewModel;
 using PageHelper;
 
@@ -24,7 +22,7 @@ namespace Bored.Service
             var data= _rolesDal.GetList();
             return Mapper.Map<List<RolesDto>>(data);
         }
-
+        
         public int Add(RolesDto model)
         {
             model.CreateTime = DateTime.Now;

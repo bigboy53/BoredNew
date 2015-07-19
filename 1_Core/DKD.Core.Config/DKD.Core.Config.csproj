@@ -46,6 +46,7 @@
     <Compile Include="Internals\ConfigNodeBase.cs" />
     <Compile Include="Internals\FileConfigService.cs" />
     <Compile Include="Internals\IConfigService.cs" />
+    <Compile Include="Models\DataBaseConnection.cs" />
     <Compile Include="Models\FrameworkConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

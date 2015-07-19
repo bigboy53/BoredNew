@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using DKD.Core.Config;
 
 namespace DKD.Framework.Filter
 {
@@ -19,7 +20,7 @@ namespace DKD.Framework.Filter
             var actionList = new Dictionary<string, List<ActionInfoAttribute>>();
 
             //要进行反射的DLL
-            var sRefDll = Config.ConfigBase.Instance<Config.FrameworkConfig>().ControllerRefs.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            var sRefDll = CachedConfigContext.Current.FrameworkConfig.ControllerRefs.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
             //遍历DLL文件
             foreach (var sDll in sRefDll)

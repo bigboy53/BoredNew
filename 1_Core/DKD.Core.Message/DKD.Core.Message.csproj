@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{61A1117F-DB90-411D-A03F-4978BCDE0990}</ProjectGuid>
+    <ProjectGuid>{F51BFA01-4685-46A6-B274-A1217A126435}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DKD.Framework.Utility</RootNamespace>
-    <AssemblyName>DKD.Framework.Utility</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>DKD.Core.Message</RootNamespace>
+    <AssemblyName>DKD.Core.Message</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,14 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,19 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageHelper\ImageUtils.cs" />
-    <Compile Include="IpHelper\IPAddress.cs" />
-    <Compile Include="VerifyCode\VerifyCode.cs" />
-    <Compile Include="Cookie\CookieHelper.cs" />
-    <Compile Include="Extensions\DataSetExtensions.cs" />
-    <Compile Include="Extensions\DateTimeExtension.cs" />
-    <Compile Include="Extensions\EnumHelper.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Files\FileManager.cs" />
-    <Compile Include="Files\FileModel.cs" />
-    <Compile Include="MD5\MD5Helper.cs" />
+    <Compile Include="Email.cs" />
+    <Compile Include="MessageException\EmailException.cs" />
+    <Compile Include="Sms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Xml\SerializationHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DKD.Core.Config\DKD.Core.Config.csproj">
+      <Project>{c62ca3b8-b775-4ef3-a09e-764773a19f87}</Project>
+      <Name>DKD.Core.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DKD.Core.Logger\DKD.Core.Logger.csproj">
+      <Project>{cf0ebb91-24b4-479c-af96-51043ef857cd}</Project>
+      <Name>DKD.Core.Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

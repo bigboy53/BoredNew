@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using DKD.Framework.Logger;
+using DKD.Core.Logger;
 
 namespace Bored.Manager.Filter
 {
@@ -23,17 +23,17 @@ namespace Bored.Manager.Filter
                 if (request.IsAjaxRequest())
                 {
                     //记录日志
-                    LoggerHelper.Logger(message);
+                    LoggerHelper.Error(LoggerType.WebExceptionLog, message, filterContext.Exception);
 
                     //转向
                     filterContext.ExceptionHandled = true;
                     filterContext.Result =
-                        new JsonResult {Data = new {Error = message, Result = false}};
+                        new JsonResult { Data = new { Error = message, Result = false, JsonRequestBehavior = true } };
                 }
                 else
                 {
                     //记录日志
-                    LoggerHelper.Logger(message);
+                    LoggerHelper.Error(LoggerType.WebExceptionLog, message, filterContext.Exception);
 
                     //转向
                     filterContext.ExceptionHandled = true;

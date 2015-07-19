@@ -154,7 +154,7 @@ namespace DKD.Core.Lucene
             }
             catch (Exception ex)
             {
-                throw new LuceneException.LuceneException("Lucene中GetList()错误",ex);
+                throw new LuceneException.LuceneException("Lucene获取列表错误",ex);
             }
         }
 

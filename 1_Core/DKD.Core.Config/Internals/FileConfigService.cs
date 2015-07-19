@@ -15,7 +15,7 @@ namespace DKD.Core.Config
         {
             if (!Directory.Exists(ConfigFolder))
                 Directory.CreateDirectory(ConfigFolder);
-            var configPath = GetFilePath(ConfigFolder);
+            var configPath = GetFilePath(fileName);
             if (!File.Exists(configPath))
                 return null;
             return File.ReadAllText(configPath);

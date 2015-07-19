@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web;
-using DKD.Framework.Common;
+using DKD.Framework.Utility.ImageHelper;
 using Newtonsoft.Json;
 
 namespace Bored.Manager.Handler

@@ -30,10 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\Lib\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\Lib\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -43,8 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogDbContext.cs" />
     <Compile Include="LoggerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Contract\DKD.Framework.Contract.csproj">
+      <Project>{0745099a-865a-4957-b42a-9db0767c6bd7}</Project>
+      <Name>DKD.Framework.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.DAL\DKD.Framework.Data.csproj">
+      <Project>{7d7296e2-8e39-451a-92c0-448abb73166c}</Project>
+      <Name>DKD.Framework.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DKD.Core.Config\DKD.Core.Config.csproj">
+      <Project>{c62ca3b8-b775-4ef3-a09e-764773a19f87}</Project>
+      <Name>DKD.Core.Config</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

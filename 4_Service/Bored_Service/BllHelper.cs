@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Web;
+using DKD.Core.Logger;
 using DKD.Framework.Const;
-using DKD.Framework.Files;
-using DKD.Framework.Logger;
+using DKD.Framework.Utility.Files;
 
 namespace Bored.Service
 {
@@ -37,15 +36,17 @@ namespace Bored.Service
                         return rootpath + newPath;
                     }
                     //打日志 覆盖图片失败
-                    LoggerHelper.Logger(string.Format(CommonConst.Error_FileMove, "（不影响程序），图片地址：" + imageUrl,
-                        "类：BllHelper.cs方法：RemoveImg "));
+                    LoggerHelper.Warn(LoggerType.WebExceptionLog,
+                        string.Format(string.Format(CommonConst.Error_FileMove, "（不影响程序），图片地址：" + imageUrl,
+                            "类：BllHelper.cs方法：RemoveImg ")), null);
                     return imageUrl;
                 }
                 return "";
             }
             catch (Exception e)
             {
-                LoggerHelper.Logger(string.Format(CommonConst.Error_FileDelete, e.Message, "类：BllHelper.cs方法：RemoveImg "));
+                LoggerHelper.Error(LoggerType.WebExceptionLog,
+                        string.Format(CommonConst.Error_FileDelete, e.Message, "类：BllHelper.cs方法：RemoveImg "), null);
             }
             return imageUrl;
         }

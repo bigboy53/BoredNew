@@ -31,22 +31,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Autofac.dll</HintPath>
+      <HintPath>..\..\Lib\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\log4net.dll</HintPath>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\..\Lib\EntityFramework.Extended.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\Lucene.Net.dll</HintPath>
+      <HintPath>..\..\Lib\Lucene\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="PanGu">
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.dll</HintPath>
+      <HintPath>..\..\Lib\Lucene\PanGu.dll</HintPath>
     </Reference>
     <Reference Include="PanGu.HighLight">
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.HighLight.dll</HintPath>
+      <HintPath>..\..\Lib\Lucene\PanGu.HighLight.dll</HintPath>
     </Reference>
     <Reference Include="PanGu.Lucene.Analyzer">
-      <HintPath>C:\Users\Administrator\Source\Repos\Bored\Lib\Lucene\PanGu.Lucene.Analyzer.dll</HintPath>
+      <HintPath>..\..\Lib\Lucene\PanGu.Lucene.Analyzer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

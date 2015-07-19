@@ -34,6 +34,14 @@ namespace DKD.Core.Config.Models
         /// IP数据库所在地址
         /// </summary>
         public string IPDatabasePath { get; set; }
+        /// <summary>
+        /// Cookies 域
+        /// </summary>
+        public string Domain { get; set; }
+        /// <summary>
+        /// 动态编译DLL的文件前缀名
+        /// </summary>
+        public string DllName { get; set; }
 
         #endregion
 
@@ -125,7 +133,6 @@ namespace DKD.Core.Config.Models
         public string ControlPath { get; set; }
 
         #endregion
-        
     }
 
 }

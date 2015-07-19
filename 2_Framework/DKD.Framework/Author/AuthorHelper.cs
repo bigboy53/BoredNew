@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Web;
-using DKD.Framework.Config;
+using DKD.Core.Config;
+using DKD.Core.Config.Models;
 using DKD.Framework.Utility.MD5;
 
 namespace DKD.Framework.Author
@@ -21,7 +22,7 @@ namespace DKD.Framework.Author
         /// <param name="isManage">为True表示获取管理员否则为前台用户</param>
         public static void SetAuthorInfo(Object source, bool isManage)
         {
-            var config = ConfigBase.Instance<FrameworkConfig>();
+            var config = CachedConfigContext.Current.FrameworkConfig;
 
             if (isManage)
                 SetOwnData(config.ManageAuthorKey, source);
@@ -36,7 +37,7 @@ namespace DKD.Framework.Author
         /// <param name="isManage">为True表示获取管理员否则为前台用户</param>
         public static void ClearAuthorInfo(bool isManage)
         {
-            var config = ConfigBase.Instance<FrameworkConfig>();
+            var config = CachedConfigContext.Current.FrameworkConfig;
 
             if (isManage)
                 ClearOwnData(config.ManageAuthorKey);
@@ -53,7 +54,7 @@ namespace DKD.Framework.Author
         public static object GetOwnData(string key)
         {
             object result;
-            if (ConfigBase.Instance<FrameworkConfig>().IsSessionAuthor)
+            if (CachedConfigContext.Current.FrameworkConfig.IsSessionAuthor)
 
                 result = HttpContext.Current.Session[key];
             else
@@ -69,7 +70,7 @@ namespace DKD.Framework.Author
         public static void SetOwnData(string key, object source)
         {
 
-            var config = ConfigBase.Instance<FrameworkConfig>();
+            var config = CachedConfigContext.Current.FrameworkConfig;
 
             if (config.IsSessionAuthor)
                 HttpContext.Current.Session[key] = source;
@@ -93,7 +94,7 @@ namespace DKD.Framework.Author
         /// <param name="key"></param>
         public static void ClearOwnData(string key)
         {
-            var config = ConfigBase.Instance<FrameworkConfig>();
+            var config = CachedConfigContext.Current.FrameworkConfig;
             if (config.IsSessionAuthor)
                 HttpContext.Current.Session.Remove(key);
             else
@@ -127,7 +128,7 @@ namespace DKD.Framework.Author
         public static object GetAuthorInfo(bool isManage)
         {
             object result;
-            var config = ConfigBase.Instance<FrameworkConfig>();
+            var config = CachedConfigContext.Current.FrameworkConfig;
             if (isManage)
                 result = GetOwnData(config.ManageAuthorKey);
             else

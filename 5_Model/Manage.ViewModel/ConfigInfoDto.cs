@@ -1,5 +1,5 @@
 ﻿using DKD.Framework.Contract.Enum;
-using DKD.Framework.Extensions;
+using DKD.Framework.Utility;
 
 namespace Manage.ViewModel
 {

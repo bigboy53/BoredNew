@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>..\Lib\EntityFramework.dll</HintPath>
+      <HintPath>..\..\Lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.Extended">
-      <HintPath>..\Lib\EntityFramework.Extended.dll</HintPath>
+      <HintPath>..\..\Lib\EntityFramework.Extended.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,6 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Config\DKD.Core.Config.csproj">
+      <Project>{c62ca3b8-b775-4ef3-a09e-764773a19f87}</Project>
+      <Name>DKD.Core.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\5_Model\Bored.Model\Bored.Model.csproj">
       <Project>{7a713ee4-e816-4d47-a2e3-91732b2e6c8d}</Project>
       <Name>Bored.Model</Name>

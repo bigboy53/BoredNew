@@ -42,7 +42,10 @@ namespace Bored.Service
             var oldModel = GetModel(entity.ID);
             entity.CreateTime = oldModel.CreateTime;
             entity.LastLoginTime = oldModel.LastLoginTime;
-            entity.Password = entity.Password.Encrypt();
+            if (!string.IsNullOrEmpty(entity.Password))
+                entity.Password = entity.Password.Encrypt();
+            else
+                entity.Password = oldModel.Password;
             return _manageUsersDal.Update(entity);
         }
 

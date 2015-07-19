@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
-using DKD.Framework.Config;
+using DKD.Core.Config;
+using DKD.Core.Config.Models;
 
 namespace DKD.Framework
 {
@@ -56,7 +57,7 @@ namespace DKD.Framework
         {
             //base.ValidateRequest = false;
 
-            CACHEOBJECT = ConfigBase.Instance<FrameworkConfig>();
+            CACHEOBJECT = CachedConfigContext.Current.FrameworkConfig;
             CURRENTABSOLUTTHEMPATH = CACHEOBJECT.ThemesPath + "/" + CACHEOBJECT.CurrentTheme + "/";
 
             MANAGEVIEWPATH = CURRENTABSOLUTTHEMPATH + CACHEOBJECT.ManageViewPath;

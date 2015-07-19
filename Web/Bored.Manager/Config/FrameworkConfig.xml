@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Framework  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<FrameworkConfig>
   <IsSessionAuthor>false</IsSessionAuthor>
   <ManageAuthorKey>669940210D2AEF035F590B9D956D2CEC</ManageAuthorKey>
   <MemberAuthorKey>222F701DD30519BDA6D2A4490E1F424C</MemberAuthorKey>
@@ -20,4 +20,6 @@
   <CurrentTheme>Default</CurrentTheme>
   <ControlPath>Controls</ControlPath>
   <CookiesTimer>10</CookiesTimer>
-</Framework>
+  <Domain> </Domain>
+  <DllName></DllName>
+</FrameworkConfig>

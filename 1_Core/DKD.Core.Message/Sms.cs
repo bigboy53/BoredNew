@@ -5,10 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DKD.Framework;
 
 
-namespace DKD.Framework.Utility.Message
+namespace DKD.Core.Message
 {
     /// <summary>
     /// 短信发送类

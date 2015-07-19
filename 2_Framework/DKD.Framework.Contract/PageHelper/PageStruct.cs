@@ -46,7 +46,7 @@ namespace PageHelper
                 var optype = HttpContext.Current.Request.QueryString["optype"];
                 if (!string.IsNullOrEmpty(optype))
                 {
-                    return optype;
+                    return optype.ToLower();
                 }
                 return "";
             }

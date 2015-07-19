@@ -30,10 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,13 +50,49 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\1_Core\DKD.Core.Config\DKD.Core.Config.csproj">
+      <Project>{c62ca3b8-b775-4ef3-a09e-764773a19f87}</Project>
+      <Name>DKD.Core.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\1_Core\DKD.Core.Logger\DKD.Core.Logger.csproj">
       <Project>{cf0ebb91-24b4-479c-af96-51043ef857cd}</Project>
       <Name>DKD.Core.Logger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.Contract\DKD.Framework.Contract.csproj">
+      <Project>{0745099a-865a-4957-b42a-9db0767c6bd7}</Project>
+      <Name>DKD.Framework.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2_Framework\DKD.Framework.DAL\DKD.Framework.Data.csproj">
+      <Project>{7d7296e2-8e39-451a-92c0-448abb73166c}</Project>
+      <Name>DKD.Framework.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\2_Framework\DKD.Framework\DKD.Framework.csproj">
       <Project>{45b1e818-a225-4de6-a611-60d694fa5fd4}</Project>
       <Name>DKD.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\3_Repository\Bored_IRepository\Bored.IRepository.csproj">
+      <Project>{eef4e858-c050-4d35-86f1-0b55d5f6ea2c}</Project>
+      <Name>Bored.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\3_Repository\Bored_Repository\Bored.Repository.csproj">
+      <Project>{20ec89fc-4252-42a0-935b-8a893c9e72f4}</Project>
+      <Name>Bored.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\4_Service\Bored_IService\Bored.IService.csproj">
+      <Project>{bb876f72-5d96-48df-b470-af31c17bacdd}</Project>
+      <Name>Bored.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\4_Service\Bored_Service\Bored.Service.csproj">
+      <Project>{b43eac94-0c08-4a91-a508-fc02c71dc0f6}</Project>
+      <Name>Bored.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Bored.Model\Bored.Model.csproj">
+      <Project>{7a713ee4-e816-4d47-a2e3-91732b2e6c8d}</Project>
+      <Name>Bored.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Model\Manage.ViewModel\Manage.ViewModel.csproj">
+      <Project>{223c0116-73f4-4b7a-a0b6-481ca8d4eadf}</Project>
+      <Name>Manage.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

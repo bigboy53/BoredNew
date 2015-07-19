@@ -24,7 +24,7 @@
     <div class="section">
         @HtmlStringHelper.Label("密码")
         <div>
-            @HtmlStringHelper.Text("Password", TextSize.medium, true, Custom.MaxSize(16), Custom.MinSize(6))
+            @HtmlStringHelper.Text("Password", TextSize.medium, "maxSize[16],minSize[6]", pageModel.OperationType.Equals("add"), "", "", true)
         </div>
     </div>
     <div class="section">

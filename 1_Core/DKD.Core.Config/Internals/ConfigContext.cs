@@ -47,7 +47,7 @@ namespace DKD.Core.Config
                 {
                     result = (T)SerializationHelper.XmlDeserialize(typeof(T), content);
                 }
-                catch
+                catch(Exception e)
                 {
                     result = new T();
                 }

@@ -7,8 +7,8 @@ using Bored.Service;
 using Bored.Repository;
 using Bored.IService;
 using Bored.IRepository;
-using DKD.Framework.Config;
-using DKD.Framework.Data.Infrastructure;
+using DKD.Core.Config;
+using DKD.Core.Config.Models;
 
 namespace Bored.Manager
 {
@@ -20,7 +20,8 @@ namespace Bored.Manager
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             #region Controller
-            string sRefDll = ConfigBase.Instance<FrameworkConfig>().ControllerRefs;
+
+            string sRefDll = CachedConfigContext.Current.FrameworkConfig.ControllerRefs;
             //var assemblies = new DirectoryInfo(
             //          HttpContext.Current.Server.MapPath("~/bin/"))
             //    .GetFiles("*.dll")

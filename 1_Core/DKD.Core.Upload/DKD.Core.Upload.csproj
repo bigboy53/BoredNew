@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UploadException\UploadException.cs" />
     <Compile Include="UploadHandler.cs" />
     <Compile Include="UploadHelper.cs" />
     <Compile Include="UploadResult.cs" />

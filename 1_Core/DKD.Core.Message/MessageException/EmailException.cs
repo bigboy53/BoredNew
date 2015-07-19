@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DKD.Framework.Utility.Message
+namespace DKD.Core.Message
 {
     public class EmailException : Exception
     {

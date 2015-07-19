@@ -1,4 +1,5 @@
-﻿using DKD.Framework.Config;
+﻿using DKD.Core.Config;
+using DKD.Core.Config.Models;
 
 namespace DKD.Framework.View
 {
@@ -49,7 +50,7 @@ namespace DKD.Framework.View
         /// </summary>
         public ViewPathHelper()
         {
-            CACHEOBJECT = FrameworkConfig.Instance<FrameworkConfig>();
+            CACHEOBJECT = CachedConfigContext.Current.FrameworkConfig;
             CURRENTABSOLUTTHEMPATH = CACHEOBJECT.ThemesPath + "/" + CACHEOBJECT.CurrentTheme + "/";
 
             MANAGEVIEWPATH = CURRENTABSOLUTTHEMPATH + CACHEOBJECT.ManageViewPath;

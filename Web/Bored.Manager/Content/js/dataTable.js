@@ -266,7 +266,7 @@
                                 }
                                 break;
                             case 'password':
-                                $(inputs[0]).val(formData[name]);
+                                //$(inputs[0]).val(formData[name]);
                                 break;
                             case 'checkbox':
                                 $(inputs[0]).prop("checked", formData[name]);

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Web;
-using DKD.Framework.Extensions;
+using DKD.Framework.Utility;
 using Lucene.Net.Analysis.PanGu;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;

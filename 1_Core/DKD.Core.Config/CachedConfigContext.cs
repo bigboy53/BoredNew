@@ -11,7 +11,7 @@ namespace DKD.Core.Config
         /// </summary>
         public override T Get<T>(string index = null)
         {
-            var fileName = this.GetConfigFileName<T>(index);
+            var fileName = base.GetConfigFileName<T>(index);
             var key = "ConfigFile_" + fileName;
             var content = Caching.Get(key);
             if (content != null)
@@ -27,6 +27,14 @@ namespace DKD.Core.Config
         public FrameworkConfig FrameworkConfig
         {
             get { return this.Get<FrameworkConfig>(); }
+        }
+
+        /// <summary>
+        /// 数据库链接字符串
+        /// </summary>
+        public DataBaseConnection DataBaseConnection
+        {
+            get { return this.Get<DataBaseConnection>(); }
         }
 
     }
