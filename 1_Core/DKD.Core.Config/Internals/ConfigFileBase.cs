@@ -7,21 +7,14 @@ namespace DKD.Core.Config
     {
         public int ID { get; set; }
 
+        /// <summary>
+        /// 暂时没用到
+        /// </summary>
         public virtual bool IsHasIndex
         {
             get { return false; }
         }
 
         internal virtual void Save() { }
-
-        internal virtual void UpdateNodeList<T>(List<T> nodeList) where T : ConfigNodeBase
-        {
-            foreach (var node in nodeList)
-            {
-                if(node.ID>0)
-                    continue;
-                node.ID = nodeList.Max(t => t.ID);
-            }
-        }
     }
 }

@@ -12,23 +12,25 @@ namespace Bored.Manager.Filter
 {
     public class ManageFilter:ActionInfoAttribute
     {
-        private readonly IManageUsersService _manageUsersBll;
-        private readonly IRolesService _rolesService;
+        private static readonly IManageUsersService _manageUsersBll;
+        private static readonly IRolesService _rolesService;
 
-        public ManageFilter(string actionName) : base(actionName)
+
+        static ManageFilter()
         {
+            //看NopCommerce中Nop.Core.Infrastructure
             var builder = new ContainerBuilder();
-            builder.RegisterType<ManageUsersService>().As<IManageUsersService>().SingleInstance();
-            builder.RegisterType<ManageUsersRepository>().As<IManageUsersRepository>().SingleInstance();
-            builder.RegisterType<RolesService>().As<IRolesService>().SingleInstance();
-            builder.RegisterType<RolesRepository>().As<IRolesRepository>().SingleInstance();
+            builder.RegisterType<ManageUsersService>().As<IManageUsersService>();
+            builder.RegisterType<ManageUsersRepository>().As<IManageUsersRepository>();
+            builder.RegisterType<RolesService>().As<IRolesService>();
+            builder.RegisterType<RolesRepository>().As<IRolesRepository>();
             _manageUsersBll = builder.Build().Resolve<IManageUsersService>();
             _rolesService = builder.Build().Resolve<IRolesService>();
         }
-        public ManageFilter(IManageUsersService manageUsersBll, IRolesService rolesService)
+
+        public ManageFilter(string actionName) : base(actionName)
         {
-            _manageUsersBll = manageUsersBll;
-            _rolesService = rolesService;
+           
         }
 
         public override void AuthorProcess(AuthorizationContext filterContext)

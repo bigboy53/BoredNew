@@ -104,7 +104,6 @@ namespace DKD.Core.Upload
 
                 OnUploaded(context, Result.FilePath);
             }
-
             context.Response.Write(GetResult(Result.LocalFileName, Result.FilePath, Result.Err));
             context.Response.End();
         }

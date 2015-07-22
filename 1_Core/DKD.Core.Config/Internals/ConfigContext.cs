@@ -70,7 +70,7 @@ namespace DKD.Core.Config
         public virtual void VerificationIndex<T>(T configFile, string index) where T : ConfigFileBase
         {
             if (configFile.IsHasIndex && string.IsNullOrEmpty(index))
-                throw new Exception("调用时没有提供配置文件的分区索引");
+                throw new ConfigException("调用时没有提供配置文件的分区索引");
         }
     }
 }

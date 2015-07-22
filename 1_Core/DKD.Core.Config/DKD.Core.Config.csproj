@@ -41,9 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachedConfigContext.cs" />
+    <Compile Include="ConfigException\ConfigException.cs" />
     <Compile Include="Internals\ConfigContext.cs" />
     <Compile Include="Internals\ConfigFileBase.cs" />
-    <Compile Include="Internals\ConfigNodeBase.cs" />
     <Compile Include="Internals\FileConfigService.cs" />
     <Compile Include="Internals\IConfigService.cs" />
     <Compile Include="Models\DataBaseConnection.cs" />
