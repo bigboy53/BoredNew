@@ -50,6 +50,10 @@ namespace Bored.Manager
             builder.RegisterType<VideoRepository>().As<IVideoRepository>().SingleInstance();
             #endregion
 
+            #region filter
+            builder.RegisterFilterProvider();
+            #endregion
+
             var container = builder.Build();
             CurrentContainer = container;
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -16,14 +16,17 @@ namespace Bored.Manager.Controllers
             _manageUsersBll = manageUsersBll;
         }
 
-        //
-        // GET: /Home/
-        [ManageFilter("首页", IsAuthorize = false)]
-        public ActionResult Index()
+        public ActionResult Login()
         {
-            var list = _manageUsersBll.GetList(t => t.ID > 0);
             return View();
         }
 
+        [HttpPost]
+        public JsonResult LoginJ(string username,string password)
+        {
+            var result=_manageUsersBll.Login(username, password);
+
+            return ReturnJson(result, result ? "" : JsonMsg.Error_Login);
+        }
     }
 }

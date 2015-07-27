@@ -5,6 +5,7 @@ using AutoMapper;
 using Bored.Model;
 using Bored.IService;
 using Bored.IRepository;
+using DKD.Framework.Author;
 using DKD.Framework.Utility.MD5;
 using Manage.ViewModel;
 using PageHelper;
@@ -71,6 +72,17 @@ namespace Bored.Service
             if (string.IsNullOrEmpty(exist))
                 return _manageUsersDal.Exist(t => t.UName == name);
             return _manageUsersDal.Exist(t => t.UName == name && t.UName != exist);
+        }
+
+        public bool Login(string userName,string passWord)
+        {
+            var data = _manageUsersDal.GetModel(t => t.UName == userName && t.Password == passWord.Encrypt());
+            if (data != null && data.ID > 0)
+            {
+                AuthorHelper.SetAuthorInfo(data, true);
+                return true;
+            }
+            return false;
         }
     }
 }

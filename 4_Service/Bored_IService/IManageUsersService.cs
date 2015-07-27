@@ -51,5 +51,12 @@ namespace Bored.IService
         /// <returns></returns>
         bool IsExist(string name,string exist="");
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="passWord"></param>
+        /// <returns></returns>
+        bool Login(string userName, string passWord);
     }
 }
