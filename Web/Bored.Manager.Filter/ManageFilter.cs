@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Bored.IService;
 using DKD.Framework.Author;
 using DKD.Framework.Filter;
+using Manage.ViewModel;
 
 namespace Bored.Manager.Filter
 {
@@ -29,8 +30,8 @@ namespace Bored.Manager.Filter
                 #region 初始变量
 
                 var currentAction = string.Format("{0}/{1}", filterContext.RouteData.Values["controller"].ToString().Trim(), filterContext.RouteData.Values["action"].ToString().Trim()).ToUpper().Trim();
-                var currenUser = AuthorHelper.GetAuthorInfo(true);
-                var userModel = ManageUsersBll.GetModel((int)currenUser);
+                var currenUser = AuthorHelper.GetAuthorInfo(true) as ManageUsersDto;
+                var userModel = ManageUsersBll.GetModel(currenUser.ID);
                 #endregion
 
                 #region 开始判断

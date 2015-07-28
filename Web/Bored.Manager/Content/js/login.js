@@ -65,36 +65,37 @@ function unloading() {
     $('#preloader').fadeOut('fast', function () { $('#overlay').fadeOut(); });
 }
 function Login() {
+    loading("请稍等...");
+    var username = $("#username_id").val();
+    var password = $("#password").val();
     $.ajax({
         type: "post",
         url: "/Home/LoginJ",
-        data: { username: "1", password: "123" },
+        data: { username: username, password: password },
         dataType: "json",
         cache: false,
-        beforeSend: function () {
-            console.info("123");
-            $("#login").animate({ opacity: 1, top: '49%' }, 200, function () {
-                $('.userbox').show().animate({ opacity: 1 }, 500);
-                $("#login").animate({ opacity: 0, top: '60%' }, 500, function () {
-                    $(this).fadeOut(200, function () {
-                        $(".text_success").slideDown();
-                        $("#successLogin").animate({ opacity: 1, height: "200px" }, 500);
-                    });
-                });
-            });
-        },
+        //beforeSend: function () {
+        //    $("#login").animate({ opacity: 1, top: '49%' }, 200, function () {
+        //        $('.userbox').show().animate({ opacity: 1 }, 500);
+        //        $("#login").animate({ opacity: 0, top: '60%' }, 500, function () {
+        //            $(this).fadeOut(200, function () {
+        //                $(".text_success").slideDown();
+        //                $("#successLogin").animate({ opacity: 1, height: "200px" }, 500);
+        //            });
+        //        });
+        //    });
+        //},
         success: function (data) {
-            debugger
-            console.info(data);
+            unloading();
             if (data.Result) {
-                setTimeout("window.location.href='dashboard.html'", 3000);
+                window.location.href = '/';
             } else {
-                //showError(data.Msg);
+                showError(data.Error);
             }
         },
         error: function (data) {
-            console.info(data);
-            //showError(data.Msg);
+            unloading();
+            showError(data.Error);
         }
     });
 }

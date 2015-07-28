@@ -79,7 +79,15 @@ namespace Bored.Service
             var data = _manageUsersDal.GetModel(t => t.UName == userName && t.Password == passWord.Encrypt());
             if (data != null && data.ID > 0)
             {
-                AuthorHelper.SetAuthorInfo(data, true);
+                data.LastLoginTime = DateTime.Now;
+                _manageUsersDal.Update(data);
+                AuthorHelper.SetAuthorInfo(new ManageUsersDto
+                {
+                    ID=data.ID,
+                    RelName=data.RelName,
+                    RID=data.RID,
+                    UName=data.UName
+                }, true);
                 return true;
             }
             return false;
